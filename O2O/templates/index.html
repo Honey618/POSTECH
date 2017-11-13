@@ -5,8 +5,9 @@
 	<title>CSS only Bulma nav bar</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css" />
+	<link rel="stylesheet" href="/O2O/static/main.css">
 	<style>
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 400px) {
 		#menu-toggle:checked + .nav-menu {
 			display: block;
 		}
@@ -20,12 +21,18 @@
 				<a class="nav-item" href="https://ko.wikipedia.org/wiki/사나_(가수)">
 					<img src="http://uhd.img.topstarnews.net/wys4/file_attach/2017/07/19/1500390132-70.jpg" alt="Bulma: a modern CSS framework based on Flexbox">
 				</a>
-				<a class="nav-item">
-					All
-				</a>
 			</div>
 			<label for="menu-toggle" class="nav-toggle">
-				<span></span>
+				<span>
+					<div class="nav-right nav-menu">
+						<a class="nav-item">
+							Search
+						</a>
+						<a class="nav-item">
+							Login
+						</a>
+					</div>
+				</span>
 				<span></span>
 				<span></span>
 			</label>
@@ -41,5 +48,8 @@
 		</div>
 	</nav>
 	<h1>{{message}}</h1>
+	<a class="bodyd">
+		<img src="/O2O/static/Images/6.gif">
+	</a>
 </body>
 </html>

@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('O2O.urls')),
     url(r'^O2O/', include('O2O.urls')),
 ]

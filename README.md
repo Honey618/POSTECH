@@ -1,8 +1,8 @@
 # POSTECH
 CS 408 Computer Science Project
-
+```
 pip3 install -r requirements.txt  
-
+```
 ### To test google OCR library
 ```
 cd O2O/parser/  

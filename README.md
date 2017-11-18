@@ -1,7 +1,8 @@
 # POSTECH
 CS 408 Computer Science Project
 ```
-sudo pip3 install -r requirements.txt  
+source env/bin/activate
+pip3 install -r requirements.txt  
 ```
 ### To test google OCR library
 ```

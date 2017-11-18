@@ -5,6 +5,14 @@ body{
     font-size: 24px;
     text-align: center;
     text-shadow: 0.1em 0.1em 0.15em #333;
+    overflow: hidden;
+    height: 100%;
+}
+html{
+  height: 100%;
+}
+img {
+  max-width: 50%;
 }
 .nav {
 	background-color: #fcf4e0;
@@ -59,7 +67,4 @@ body{
 .button:hover span:after {
   opacity: 1;
   right: 0;
-}
-img {
-	max-width: 100%;
 }

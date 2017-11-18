@@ -12,5 +12,8 @@ python3 detect.py text [image path]
 
 ex) python3 detect.py test test1.jpeg
 
-
+### If you've downloaded new package.
+```
+pip freeze > requirements.txt
+```
 

@@ -1,8 +1,16 @@
 # POSTECH
-CS 408 Computer Science Project
+### CS 408 Computer Science Project
 ```
 source env/bin/activate
 pip3 install -r requirements.txt  
+```
+### Installing Semantic-UI
+```
+brew install node
+npm install -g gulp
+npm install semantic-ui --save
+cd semantic/
+gulp build
 ```
 ### To test google OCR library
 ```

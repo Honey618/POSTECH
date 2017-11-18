@@ -31,6 +31,8 @@ https://cloud.google.com/vision/docs.
 import argparse
 import io
 import math
+import json
+
 from google.cloud import vision
 from google.cloud.vision import types
 
@@ -283,8 +285,10 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
-    return(texts)
-    '''print('Texts:')
+    print(texts[0])
+    
+    #return(texts)
+    print('Texts:')
 
     for text in texts:
         print('\n"{}"'.format(text.description))
@@ -293,7 +297,7 @@ def detect_text(path):
                     for vertex in text.bounding_poly.vertices])
         
         print('pixels: {}'.format(pixel_text(text.bounding_poly.vertices[0], text.bounding_poly.vertices[3])))
-        print('bounds: {}'.format(','.join(vertices)))'''
+        print('bounds: {}'.format(','.join(vertices)))
     # [END migration_text_detection]
 # [END def_detect_text]
 
@@ -570,7 +574,7 @@ def run_local(args):
     elif args.command == 'landmarks':
         detect_landmarks(args.path)
     elif args.command == 'text':
-        print(detect_text(args.path))
+        detect_text(args.path)
     elif args.command == 'logos':
         detect_logos(args.path)
     elif args.command == 'safe-search':

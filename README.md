@@ -1,4 +1,9 @@
 # POSTECH
+### Setting Virtual Environment to Python3
+```
+pip3 install virtualenv
+virtualenv -p python3 env
+```
 ### CS 408 Computer Science Project
 ```
 source env/bin/activate

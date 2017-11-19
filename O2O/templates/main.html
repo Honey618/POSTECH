@@ -1,54 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>CSS only Bulma nav bar</title>
+    <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, height=device-height;, initial-scale=1">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css" />
 	<link rel="stylesheet" href="/O2O/static/main.css">
-	<style>
-	@media screen and (max-width: 400px) {
-		#menu-toggle:checked + .nav-menu {
-			display: block;
-		}
-	}
-</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
 </head>
+
 <body>
-	<nav class="nav">
-		<div class="container">
-			<div class="nav-left">
-				<a class="nav-item" href="https://ko.wikipedia.org/wiki/사나_(가수)">
-					<img src="http://uhd.img.topstarnews.net/wys4/file_attach/2017/07/19/1500390132-70.jpg" alt="Bulma: a modern CSS framework based on Flexbox">
-				</a>
-			</div>
-			<label for="menu-toggle" class="nav-toggle">
-				<span>
-					<div class="nav-right nav-menu">
-						<a class="nav-item">
-							Search
-						</a>
-						<a class="nav-item">
-							Login
-						</a>
-					</div>
-				</span>
-				<span></span>
-				<span></span>
-			</label>
-			<input type="checkbox" id="menu-toggle" class="is-hidden"/>
-			<div class="nav-right nav-menu">
-				<a class="nav-item">
-					Search
-				</a>
-				<a class="nav-item">
-					Login
-				</a>
-			</div>
-		</div>
-	</nav>
-	<h1>{{message}}</h1>
-	<a class="bodyd">
+	<button class="ui button">
+		Button
+	</button>
+	<div class="ui button" tabindex="0">
+		Focusable
+	</div>
+	<button class="ui primary button">
+		Save
+	</button>
+	<a href="https://ko.wikipedia.org/wiki/사나_(가수)">
+		<img src="http://uhd.img.topstarnews.net/wys4/file_attach/2017/07/19/1500390132-70.jpg" alt="Bulma: a modern CSS framework based on Flexbox">
+	</a>
+	<a >
 		<img src="/O2O/static/Images/6.gif">
 	</a>
 </body>

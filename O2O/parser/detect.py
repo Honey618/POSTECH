@@ -35,7 +35,7 @@ import json
 
 from google.cloud import vision
 from google.cloud.vision import types
-
+from parser import *
 
 # [START def_detect_faces]
 def detect_faces(path):
@@ -514,24 +514,37 @@ def detect_document(path):
     image = types.Image(content=content)
 
     response = client.document_text_detection(image=image)
+    
     document = response.full_text_annotation
-
+    result = []
     for page in document.pages:
+        #print('{}'.format(page))
         for block in page.blocks:
             block_words = []
             for paragraph in block.paragraphs:
                 block_words.extend(paragraph.words)
 
+            size = 0
             block_symbols = []
             for word in block_words:
                 block_symbols.extend(word.symbols)
+                
+
 
             block_text = ''
             for symbol in block_symbols:
                 block_text = block_text + symbol.text
-
-            print('Block Content: {}'.format(block_text))
-            print('Block Bounds:\n {}'.format(block.bounding_box))
+                size += pixel_text(symbol.bounding_box.vertices[0], symbol.bounding_box.vertices[3])
+            avg_symbol_size = size/float(len(block_symbols))
+            print(block_text)
+            result.append({"content" : block_text, "bounds" : ([(vertex.x, vertex.y)
+                    for vertex in block.bounding_box.vertices]), "size" : avg_symbol_size})
+                    #pixel_text(block.bounding_box.vertices[0], block.bounding_box.vertices[3])})
+            
+            #print('Block Content: {}'.format(block_text))
+            #print('Block Bounds:\n {}'.format(block.bounding_box))
+    print(result)
+    return(result)
     # [END migration_document_text_detection]
 # [END def_detect_document]
 
@@ -546,6 +559,7 @@ def detect_document_uri(uri):
 
     response = client.document_text_detection(image=image)
     document = response.full_text_annotation
+
 
     for page in document.pages:
         for block in page.blocks:
@@ -586,7 +600,7 @@ def run_local(args):
     elif args.command == 'crophints':
         detect_crop_hints(args.path)
     elif args.command == 'document':
-        detect_document(args.path)
+        evnt_parser(detect_document(args.path))
 
 
 def run_uri(args):

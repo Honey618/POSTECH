@@ -7,5 +7,5 @@ def main(request):
 	return render(request, 'main.html')
 	
 def index(request):
-	msg = "Hello, world. You're at the polls index."
+    	#msg = "Hello, world. You're at the polls index."
 	return render(request, 'index.html', {'message': msg})

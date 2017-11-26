@@ -68,7 +68,6 @@ def file_upload(request):
 		picture_upload_form = PictureUploadForm(request.POST, request.FILES)
 		if picture_upload_form.is_valid():
 			poster = picture_upload_form.file_upload(username=request.session['username'])
-
 			result = evnt_parser(detect_document(settings.BASE_DIR+poster.file.url))
 			if poster:
 				return render(request, 'main.html', {'result': result})
@@ -85,13 +84,13 @@ def feedback_upload(request):
 
 	else :
 		print(request)
-		feedback_form = FeedbackForm(request.POST)
+		feedback_form = FeedbackForm(request.POST, request.FILES)
 		
 		if feedback_form.is_valid():
-			print("POSTER")
+			print(request.session['username'])
 
-			poster = feedback_form.feedback_upload()
-			print(poster)
+			poster = feedback_form.feedback_upload(username=request.session['username'])
+			
 			if poster:
 				return render(request, 'main.html')
 

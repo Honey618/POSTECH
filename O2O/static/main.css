@@ -42,15 +42,12 @@ img {
 }
 
 .logo1 {
-	height: 40px;
 	display: inline-block;
-	float: right;
 }
 
 #logoid {
 	display: inline-block;
 	margin: auto;
-	vertical-align: middle;
 }
 
 .fileUpload {
@@ -130,10 +127,6 @@ img {
 
 .login {
 	display: inline-block;
-	vertical-align: middle;
-	margin-top: 10px;
-	margin-right: 50px;
-	float: right;
 }
 
 

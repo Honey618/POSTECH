@@ -9,7 +9,7 @@ class User(models.Model):
         return self.username
 
 class Poster(models.Model):
-    participant = models.ForeignKey(
+    user = models.ForeignKey(
         to=User,
         related_name='poster',
     )

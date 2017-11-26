@@ -39,7 +39,7 @@ class PictureUploadForm(forms.Form):
 		from .models import User, Poster
 
 		poster = Poster.objects.create(
-			participant=User.objects.filter(username=username)[0],
+			user=User.objects.filter(username=username)[0],
 			file=self.cleaned_data['file'],
 		)
 

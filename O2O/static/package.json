@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+<<<<<<< HEAD
     "gulp": "^3.9.1",
     "gulp-util": "^3.0.8"
+=======
+    "gulp-util": "^3.0.8",
+    "semantic-ui": "^2.2.13"
+>>>>>>> 40a58ac9925b1065383915317bf2a73466fcb547
   },
   "devDependencies": {},
   "scripts": {

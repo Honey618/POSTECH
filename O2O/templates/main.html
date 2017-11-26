@@ -83,6 +83,7 @@
 				</form>
 			</div>
 		</div>
+
 	</div>
 	<script type="text/javascript">
 		$('.ui.sidebar').sidebar({
@@ -93,6 +94,7 @@
 	<script>
 		document.getElementById("uploadBtn").onchange = function () {
 			document.getElementById("uploadFile").value = this.value;
+
 			console.log(this.value);
 		};
 	</script>
@@ -105,8 +107,6 @@
 					'id': $(this).attr('id'),
 				})
 			})
-
-			console.log(positions)
 			// console.log(encodeURIComponent(JSON.stringify(positions)))
 
 			location.href = '/save_position?data=' + encodeURIComponent(JSON.stringify(positions))

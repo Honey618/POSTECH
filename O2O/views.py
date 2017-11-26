@@ -4,9 +4,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from .forms import UserForm, PictureUploadForm
-	
+from .parser.detect import *
+from .parser.parser import *
+
+
 def main(request):
 	return render(request, 'main.html')
 
@@ -65,8 +69,9 @@ def file_upload(request):
 		if picture_upload_form.is_valid():
 			poster = picture_upload_form.file_upload(username=request.session['username'])
 
+			result = evnt_parser(detect_document(settings.BASE_DIR+poster.file.url))
 			if poster:
-				return redirect('/index')
+				return render(request, 'main.html', {'result': result})
 
 		else:
 			print(picture_upload_form.errors)

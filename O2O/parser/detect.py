@@ -27,6 +27,8 @@ python detect.py faces-uri gs://your-bucket/file.jpg
 For more information, the documentation at
 https://cloud.google.com/vision/docs.
 """
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 import argparse
 import io

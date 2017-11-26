@@ -70,20 +70,27 @@
 				{% endfor %}
 				<form method="POST" class="uploading" action="file_upload" enctype="multipart/form-data">
 					{% csrf_token %}
-					<div class="search">
-						<input id="uploadFile" placeholder="Choose File" disabled="disabled" />
-					</div>
 					<div class="fileUpload btn btn-primary">
-					    <span>Upload</span>
-					    <input id="uploadBtn" name="file" type="file" class="upload" />
+						<div class="letsupload">
+							<img src="/static/Images/login.gif" />
+					    	<input id="uploadBtn" name="file" type="file" class="upload" />							
+						</div>
 					</div>
 					<div class="confirm">
-						<button class="upup" type="submit">Confirm</button>
+						<button class="ui circular facebook icon button" type="submit">
+							<i class="facebook icon"></i>
+						</button>
 					</div>
 				</form>
 			</div>
 		</div>
+<<<<<<< HEAD
 
+=======
+		<div class="feedback" >
+			
+		</div>
+>>>>>>> 0301656993af73b3590da78416eb3a24d5c67cb0
 	</div>
 	<script type="text/javascript">
 		$('.ui.sidebar').sidebar({
@@ -92,6 +99,7 @@
 		.sidebar('attach events', '.menu .item');
 	</script>
 	<script>
+<<<<<<< HEAD
 		document.getElementById("uploadBtn").onchange = function () {
 			document.getElementById("uploadFile").value = this.value;
 
@@ -113,6 +121,8 @@
 		})
 	</script>
 	<script>
+=======
+>>>>>>> 0301656993af73b3590da78416eb3a24d5c67cb0
 		$("#Login").on("click", function() {
 			$(this).closest("form").attr('action', '/login')
 		})
@@ -143,6 +153,10 @@
 			return false;
 			});
 		});
+	</script>
+	<!-- Feedback-->
+	<script type="text/javascript">
+		
 	</script>
 
 </body>

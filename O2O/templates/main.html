@@ -1,29 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, height=device-height;, initial-scale=1">
-	<link rel="stylesheet" href="/O2O/static/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
-</head>
+    <meta charset = "utf-8" />
+	<meta name = "viewport" content = "width=device-width, height=device-height;, initial-scale=1">
+    <link rel = "stylesheet" type = "text/css" href = "/static/semantic/dist/semantic.min.css">
+	<link rel = "stylesheet" href = "/static/main.css">
+	<script
+	  src = "https://code.jquery.com/jquery-3.1.1.min.js"
+	  integrity = "sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	  crossorigin = "anonymous"></script>
+	<script src = "/static/semantic/dist/semantic.min.js"></script>
 
-<body>
-	<button class="ui button">
-		Button
-	</button>
-	<div class="ui button" tabindex="0">
-		Focusable
+</head>
+<body id = "animate-area">
+	<div id = "UITOP" class="ui top attached demo menu">
+		<a id = "item1" class="item">
+			<i class="sidebar icon"></i> Menu
+		</a>
+		<div class = "logo1">
+			<img id = "logoid" alt="POSTECH" src = "static/Images/logo.jpg" width="118" height="33">
+		</div>
+		<div class="login">
+			<a href="#login-box" class="login-window">
+				<img alt="Login" src="/static/images/login.gif" width="40" height="40">
+			</a>
+			<div id="login-box" class="login-popup">
+				<a href="#" class="close"><img src="/static/images/exit.gif" width="10" height="10" class="btn_close" title="Close Window" alt="Close" /></a>
+				<form method="POST" class="signin">
+				{% csrf_token %}
+					<fieldset class="textbox">
+						<label class="username">
+							<span>Username or email</span>
+							<input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
+						</label>
+						<button class="submit button" type="submit" id="Login">Login</button>
+						<button class="submit button" type="submit" id="Sign_Up">Sign Up</button>
+						<!-- <p> -->
+							<!-- <a class="forgot" href="Shinsta.html">Forgot your password?</a> -->
+						<!-- </p>         -->
+					</fieldset>
+				</form>
+			</div>
+		</div>
 	</div>
-	<button class="ui primary button">
-		Save
-	</button>
-	<a href="https://ko.wikipedia.org/wiki/사나_(가수)">
-		<img src="http://uhd.img.topstarnews.net/wys4/file_attach/2017/07/19/1500390132-70.jpg" alt="Bulma: a modern CSS framework based on Flexbox">
-	</a>
-	<a >
-		<img src="/O2O/static/Images/6.gif">
-	</a>
+	<div class="ui bottom attached segment">
+		<div class="ui inverted labeled icon left inline vertical demo sidebar menu">
+			<a class="item">
+				<i class="home icon"></i> Home
+			</a>
+			<a class="item">
+				<i class="block layout icon"></i> Upload Image
+			</a>
+			<a class="item">
+				<i class="smile icon"></i> Friends
+			</a>
+			<a class="item">
+				<i class="calendar icon"></i> History
+			</a>
+		</div>
+		<div class="pusher">
+			<div class="ui basic segment">
+				<div id="{{ poster.id }}" class="card" style="left: {{ poster.left }}px; top: {{ poster.top }}px; width: {{ poster.width }}; height: {{ poster.height }}">
+					<div class="contents">
+						<p align="center"><img src="{{ poster.file.url }}" alt="Sana" width="174" height="261">
+					</div>
+				</div>
+				<form method="POST" class="uploading" action="file_upload" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="search">
+						<input id="uploadFile" placeholder="Choose File" disabled="disabled" />
+					</div>
+					<div class="fileUpload btn btn-primary">
+					    <span>Upload</span>
+					    <input id="uploadBtn" name="file" type="file" class="upload" />
+					</div>
+					<div class="confirm">
+						<button class="upup" type="submit">Confirm</button>
+					</div>
+				</form>
+				<a >
+					<img src="/static/Images/6.gif">
+				</a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('.ui.sidebar').sidebar({
+		context: $('.bottom.segment')
+		})
+		.sidebar('attach events', '.menu .item');
+	</script>
+	<script>
+		$('.upup').on('click', function() {
+			var positions = []
+
+			$('.card').each(function() {
+				positions.push({
+					'id': $(this).attr('id'),
+					'top': $(this).css('top'),
+					'left': $(this).css('left'),
+					'width': $(this).innerWidth(),
+					'height': $(this).innerHeight(),
+				})
+			})
+
+			console.log(positions)
+			// console.log(encodeURIComponent(JSON.stringify(positions)))
+
+			location.href = '/save_position?data=' + encodeURIComponent(JSON.stringify(positions))
+		})
+	</script>
+	<script>
+		$("#Login").on("click", function() {
+			$(this).closest("form").attr('action', '/login')
+		})
+		$("#Sign_Up").on("click", function() {
+			$(this).closest("form").attr('action', '/sign_up')
+		})
+	</script>
+	<!-- Login-->
+	<script>
+		$(document).ready(function() {
+			$('a.login-window').click(function() {
+				var loginBox = $(this).attr('href');
+				$(loginBox).fadeIn(300);
+				var popMargTop = ($(loginBox).height() + 24) / 2; 
+				var popMargLeft = ($(loginBox).width() + 24) / 2; 
+				$(loginBox).css({ 
+				    'margin-top' : -popMargTop,
+				    'margin-left' : -popMargLeft
+				});
+				$('body').append('<div id="mask"></div>');
+				$('#mask').fadeIn(300);    
+				return false;
+			});
+			$('a.close, #mask').on('click', function() { 
+				$('#mask , .login-popup').fadeOut(300 , function() {
+					$('#mask').remove();  
+				}); 
+			return false;
+			});
+		});
+	</script>
+	<script>
+		document.getElementById("uploadBtn").onchange = function () {
+			document.getElementById("uploadFile").value = this.value;
+		};
+	</script>
+
 </body>
 </html>

@@ -16,9 +16,21 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.staticfiles import storage
+from django.conf import settings
+from django.conf.urls.static import static
+
+from O2O.views import index, sign_up, login, file_upload
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('O2O.urls')),
     url(r'^O2O/', include('O2O.urls')),
+    url(r'^index$', index),
+    url(r'^sign_up$', sign_up),
+    url(r'^login$', login),
+    url(r'^file_upload$', file_upload),
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

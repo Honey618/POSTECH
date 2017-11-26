@@ -41,7 +41,6 @@ class PictureUploadForm(forms.Form):
 			user=User.objects.filter(username=username)[0],
 			file=self.cleaned_data['file'],
 		)
-
 		return poster
 
 class FeedbackForm(forms.Form):
@@ -50,13 +49,14 @@ class FeedbackForm(forms.Form):
 	eventdate = forms.CharField()
 	eventtext = forms.CharField()
 
-	def feedback_upload(self):
-		from .models import Poster
+	def feedback_upload(self, username):
+		from .models import User, Poster
 
-		poster = Poster.objects.create(
-			eventname=self.cleaned_data['title'],
-			eventdate=self.cleaned_data['date'],
-			eventtext=self.cleaned_data['text'],
+		
+		poster = Poster.objects.filter(user__username=username).update(
+			eventname=self.cleaned_data['eventname'],
+			eventdate=self.cleaned_data['eventdate'],
+			eventtext=self.cleaned_data['eventtext'],
 		)
 
 		return poster

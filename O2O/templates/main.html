@@ -89,11 +89,11 @@
 					{% csrf_token %}
 				<div class="field">
 					<label>Event Title</label>
-					    <input type="text" name="title" placeholder="First Name" value={{result.title}}>
+					    <input type="text" name="eventname" placeholder="First Name" value={{result.title}}>
 				</div>
 				  <div class="field">
 				    <label>Event Start Date</label>
-				    <input type="text" name="date" placeholder="Last Name" value={{result.date}}>
+				    <input type="text" name="eventdate" placeholder="Last Name" value={{result.date}}>
 				  </div>
 				  <div class="field">
 				    <label>Event End Date</label>
@@ -101,7 +101,7 @@
 				  </div>
 				  <div class="field">
 				    <label>Event Contact</label>
-				    <input type="text" name="text" placeholder="Last Name" value={{result.contact}}>
+				    <input type="text" name="eventtext" placeholder="Last Name" value={{result.contact}}>
 				  </div>
 				  <div class="field">
 				    <label>Event Place</label>

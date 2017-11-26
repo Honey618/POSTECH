@@ -85,27 +85,31 @@
 			</div>
 		</div>
 		<div class="feedback">
-			<form method="POST" class="ui form" action="file_upload" enctype="multipart/form-data">
+			<form method="POST" class="ui form" action="feedback_upload" enctype="multipart/form-data">
 					{% csrf_token %}
 				<div class="field">
 					<label>Event Title</label>
-					    <input type="text" name="first-name" placeholder="First Name">{{result.title}}
+					    <input type="text" name="title" placeholder="First Name" value={{result.title}}>
 				</div>
 				  <div class="field">
-				    <label>Event Date</label>
-				    <input type="text" name="last-name" placeholder="Last Name">{{result.date}}
+				    <label>Event Start Date</label>
+				    <input type="text" name="date" placeholder="Last Name" value={{result.date}}>
+				  </div>
+				  <div class="field">
+				    <label>Event End Date</label>
+				    <input type="text" name="enddate" placeholder="Last Name" value={{result.date}}>
 				  </div>
 				  <div class="field">
 				    <label>Event Contact</label>
-				    <input type="text" name="last-name" placeholder="Last Name">{{result.contact}}
+				    <input type="text" name="text" placeholder="Last Name" value={{result.contact}}>
 				  </div>
 				  <div class="field">
 				    <label>Event Place</label>
-				    <input type="text" name="last-name" placeholder="Last Name">
+				    <input type="text" name="last-name" placeholder="Last Name" value={{result.place}}>
 				  </div>
 				  <div class="field">
 				    <label>Event Link</label>
-				    <input type="text" name="last-name" placeholder="Last Name">
+				    <input type="text" name="last-name" placeholder="Last Name" value={{result.url}}>
 				  </div>
 					  <div class="field">
 					    <div class="ui checkbox">

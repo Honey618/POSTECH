@@ -1,6 +1,5 @@
 from django import forms
 
-
 class UserForm(forms.Form):
 	username = forms.CharField()
 
@@ -45,4 +44,19 @@ class PictureUploadForm(forms.Form):
 
 		return poster
 
-		
+class FeedbackForm(forms.Form):
+	
+	eventname = forms.CharField()
+	eventdate = forms.CharField()
+	eventtext = forms.CharField()
+
+	def feedback_upload(self):
+		from .models import Poster
+
+		poster = Poster.objects.create(
+			eventname=self.cleaned_data['title'],
+			eventdate=self.cleaned_data['date'],
+			eventtext=self.cleaned_data['text'],
+		)
+
+		return poster

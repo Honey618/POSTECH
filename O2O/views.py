@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
-from .forms import UserForm, PictureUploadForm
+from .forms import UserForm, PictureUploadForm, FeedbackForm
 from .parser.detect import *
 from .parser.parser import *
 
@@ -78,3 +78,27 @@ def file_upload(request):
 
 		# error handling
 		return redirect('/index')
+
+def feedback_upload(request):
+	if request.method == 'GET':
+		return redirect('/index')
+
+	else :
+		print(request)
+		feedback_form = FeedbackForm(request.POST)
+		
+		if feedback_form.is_valid():
+			print("POSTER")
+
+			poster = feedback_form.feedback_upload()
+			print(poster)
+			if poster:
+				return render(request, 'main.html')
+
+		else:
+			print(feedback_form.errors)
+
+
+
+		return redirect('/index')
+

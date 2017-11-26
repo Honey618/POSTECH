@@ -21,11 +21,12 @@ def detect_date(contentList):
 		if any(element in block['content'] for element in sample):
 
 			print("Supposed to Date : {}".format(block['content']))
-			result.apppend(block['content'])
-			matches = datefinder.find_dates(block['content'])
+			result.append(block['content'])
+			'''matches = datefinder.find_dates(block['content'])
 			for match in matches:
 				print("Supposed to Date : {}".format(match))
-				result.apppend(match)
+				result.append(match)
+			'''
 	return result
 
 def detect_url(contentList):
@@ -34,7 +35,7 @@ def detect_url(contentList):
 	for block in contentList:
 		if any(element in block['content'] for element in sample) and not any(element in block['content'] for element in contact_sample):
 			print("Supposed to url : {}".format(block['content']))
-			result.apppend(block['content'])
+			result.append(block['content'])
 	return result
 
 def detect_contact(contentList):
@@ -43,7 +44,7 @@ def detect_contact(contentList):
 	for block in contentList:
 		if any(element in block['content'] for element in sample):
 			print("Supposed to contact : {}".format(block['content']))
-			result.apppend(block['content'])
+			result.append(block['content'])
 	return result
 
 
@@ -53,5 +54,5 @@ def detect_place(contentList):
 	for block in contentList:
 		if any(element in block['content'] for element in sample):
 			print("Supposed to place : {}".format(block['content']))
-			result.apppend(block['content'])
+			result.append(block['content'])
 	return result

@@ -73,6 +73,11 @@ img {
 	margin: auto;
 }
 
+.letsupload {
+	max-height: 10px;
+	max-width: 10px;
+}
+
 .fileUpload {
     display: inline-block;
     cursor: pointer; 

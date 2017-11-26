@@ -77,20 +77,45 @@
 						</div>
 					</div>
 					<div class="confirm">
-						<button class="ui circular facebook icon button" type="submit">
+						<button class="ui circular facebook icon button" type="submit" onclick="showFeedback()">
 							<i class="facebook icon"></i>
 						</button>
 					</div>
 				</form>
 			</div>
 		</div>
-<<<<<<< HEAD
-
-=======
-		<div class="feedback" >
-			
+		<div class="feedback">
+			<form method="POST" class="ui form" action="file_upload" enctype="multipart/form-data">
+					{% csrf_token %}
+				<div class="field">
+					<label>Event Title</label>
+					    <input type="text" name="first-name" placeholder="First Name">{{result.title}}
+				</div>
+				  <div class="field">
+				    <label>Event Date</label>
+				    <input type="text" name="last-name" placeholder="Last Name">{{result.date}}
+				  </div>
+				  <div class="field">
+				    <label>Event Contact</label>
+				    <input type="text" name="last-name" placeholder="Last Name">{{result.contact}}
+				  </div>
+				  <div class="field">
+				    <label>Event Place</label>
+				    <input type="text" name="last-name" placeholder="Last Name">
+				  </div>
+				  <div class="field">
+				    <label>Event Link</label>
+				    <input type="text" name="last-name" placeholder="Last Name">
+				  </div>
+					  <div class="field">
+					    <div class="ui checkbox">
+					      <input type="checkbox" tabindex="0" class="hidden">
+					      <label>I agree to the Terms and Conditions</label>
+					    </div>
+					  </div>
+					  <button class="ui button" type="submit">Submit</button>
+			</form>
 		</div>
->>>>>>> 0301656993af73b3590da78416eb3a24d5c67cb0
 	</div>
 	<script type="text/javascript">
 		$('.ui.sidebar').sidebar({
@@ -99,30 +124,6 @@
 		.sidebar('attach events', '.menu .item');
 	</script>
 	<script>
-<<<<<<< HEAD
-		document.getElementById("uploadBtn").onchange = function () {
-			document.getElementById("uploadFile").value = this.value;
-
-			console.log(this.value);
-		};
-	</script>
-	<script>
-		$('.upup').on('click', function() {
-			var positions = []
-
-			$('.card').each(function() {
-				positions.push({
-					'id': $(this).attr('id'),
-				})
-			})
-			// console.log(encodeURIComponent(JSON.stringify(positions)))
-
-			location.href = '/save_position?data=' + encodeURIComponent(JSON.stringify(positions))
-		})
-	</script>
-	<script>
-=======
->>>>>>> 0301656993af73b3590da78416eb3a24d5c67cb0
 		$("#Login").on("click", function() {
 			$(this).closest("form").attr('action', '/login')
 		})
@@ -156,7 +157,11 @@
 	</script>
 	<!-- Feedback-->
 	<script type="text/javascript">
-		
+		$(document).ready( function () {
+			$('.confirm button').click(function() {
+				$('.feedback').css("display", "block");
+			})
+		})
 	</script>
 
 </body>

@@ -13,7 +13,7 @@ pip3 install -r requirements.txt
 ```
 brew install node
 npm install -g gulp
-cd POSTECH/static/
+cd O2O/static/
 npm install semantic-ui --save
 cd semantic/
 gulp build

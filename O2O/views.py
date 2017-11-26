@@ -14,7 +14,7 @@ def index(request):
 	from .models import Poster
 	poster = Poster.objects.all()
 
-	return render(request, 'index.html', {'poster': poster})
+	return render(request, 'main.html', {'poster': poster})
 
 def sign_up(request):
 	if request.method == 'GET':

@@ -24,6 +24,7 @@ from O2O.views import index, sign_up, login, file_upload
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^', include('O2O.urls')),
     url(r'^O2O/', include('O2O.urls')),
     url(r'^index$', index),

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <head>
     <meta charset = "utf-8" />
-	<meta name = "viewport" content = "width=device-width, height=device-height;, initial-scale=1">
+	<meta name = "viewport" content = "width=device-width, height=device-height, initial-scale=1">
     <link rel = "stylesheet" type = "text/css" href = "/static/semantic/dist/semantic.min.css">
 	<link rel = "stylesheet" href = "/static/main.css">
+  	<script src = "https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<script
 	  src = "https://code.jquery.com/jquery-3.1.1.min.js"
 	  integrity = "sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -29,7 +31,7 @@
 				{% csrf_token %}
 					<fieldset class="textbox">
 						<label class="username">
-							<span>Username or email</span>
+							<span>Username</span>
 							<input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
 						</label>
 						<button class="submit button" type="submit" id="Login">Login</button>
@@ -59,11 +61,13 @@
 		</div>
 		<div class="pusher">
 			<div class="ui basic segment">
-				<div id="{{ poster.id }}" class="card" style="left: {{ poster.left }}px; top: {{ poster.top }}px; width: {{ poster.width }}; height: {{ poster.height }}">
-					<div class="contents">
-						<p align="center"><img src="{{ poster.file.url }}" alt="Sana" width="174" height="261">
+				{% for poster in posters %}
+					<div id="{{ poster.id }}" class="card">
+						<div class="contents">
+							<p align="center"><img src="{{ poster.file.url }}" alt="Sana" width="174" height="261">
+						</div>
 					</div>
-				</div>
+				{% endfor %}
 				<form method="POST" class="uploading" action="file_upload" enctype="multipart/form-data">
 					{% csrf_token %}
 					<div class="search">
@@ -77,9 +81,6 @@
 						<button class="upup" type="submit">Confirm</button>
 					</div>
 				</form>
-				<a >
-					<img src="/static/Images/6.gif">
-				</a>
 			</div>
 		</div>
 	</div>
@@ -90,16 +91,18 @@
 		.sidebar('attach events', '.menu .item');
 	</script>
 	<script>
+		document.getElementById("uploadBtn").onchange = function () {
+			document.getElementById("uploadFile").value = this.value;
+			console.log(this.value);
+		};
+	</script>
+	<script>
 		$('.upup').on('click', function() {
 			var positions = []
 
 			$('.card').each(function() {
 				positions.push({
 					'id': $(this).attr('id'),
-					'top': $(this).css('top'),
-					'left': $(this).css('left'),
-					'width': $(this).innerWidth(),
-					'height': $(this).innerHeight(),
 				})
 			})
 
@@ -127,7 +130,7 @@
 				var popMargLeft = ($(loginBox).width() + 24) / 2; 
 				$(loginBox).css({ 
 				    'margin-top' : -popMargTop,
-				    'margin-left' : -popMargLeft
+				    'margin-left' : -popMargLeftp
 				});
 				$('body').append('<div id="mask"></div>');
 				$('#mask').fadeIn(300);    
@@ -140,11 +143,6 @@
 			return false;
 			});
 		});
-	</script>
-	<script>
-		document.getElementById("uploadBtn").onchange = function () {
-			document.getElementById("uploadFile").value = this.value;
-		};
 	</script>
 
 </body>

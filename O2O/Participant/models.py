@@ -11,7 +11,7 @@ class User(models.Model):
 class Poster(models.Model):
     user = models.ForeignKey(
         to=User,
-        related_name='poster',
+        related_name='posters',
     )
     uploaddate = models.DateTimeField(
             default=timezone.now)
@@ -20,7 +20,3 @@ class Poster(models.Model):
             blank=True, null=True)
     eventtext = models.TextField()
     file = models.ImageField()
-    top = models.IntegerField(default = 0)
-    left = models.IntegerField(default = 0)
-    width = models.IntegerField(default = 200)
-    height = models.IntegerField(default = 350)

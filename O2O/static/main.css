@@ -37,6 +37,29 @@ img {
 	padding-right: 30%;
 }
 
+@media only screen and (min-width: 450px) {
+  #content .small {	
+	  display: block;
+  }   
+  #content .big {	
+	  display: none;
+  }  
+} 
+
+@media only screen and (min-width: 780px) and (max-width: 1024px) {
+  #content .mid {	
+	  display: block;
+  }  
+  #content .big {	
+	  display: none;
+  }     
+}
+
+#stcanvas
+{
+    position:absolute;    
+}
+
 #item1 {
 	float: left;
 }
@@ -97,6 +120,18 @@ img {
 	vertical-align: middle;
 	margin-left: 80px;
 	margin-top: 20px;
+}
+
+.contents{
+    position: relative;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
+/*
+    resize: both;
+    overflow: scroll;
+    border: 1px solid block;
+*/
 }
 
 .confirm{

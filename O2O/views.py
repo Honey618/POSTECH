@@ -12,9 +12,9 @@ def main(request):
 
 def index(request):
 	from .models import Poster
-	poster = Poster.objects.all()
+	posters = Poster.objects.all()
 
-	return render(request, 'main.html', {'poster': poster})
+	return render(request, 'main.html', {'posters': posters})
 
 def sign_up(request):
 	if request.method == 'GET':
@@ -62,7 +62,6 @@ def file_upload(request):
 
 	else :
 		picture_upload_form = PictureUploadForm(request.POST, request.FILES)
-
 		if picture_upload_form.is_valid():
 			poster = picture_upload_form.file_upload(username=request.session['username'])
 

@@ -19,7 +19,7 @@ from django.contrib.staticfiles import storage
 from django.conf import settings
 from django.conf.urls.static import static
 
-from O2O.views import index, sign_up, login, file_upload, feedback_upload
+from O2O.views import index, sign_up, login, file_upload, feedback_upload, myimages
 
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^login$', login),
     url(r'^file_upload$', file_upload),
     url(r'^feedback_upload$', feedback_upload),
+    url(r'^myimages$', myimages),
 ]
 
 

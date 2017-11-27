@@ -14,6 +14,12 @@ from .parser.parser import *
 def main(request):
 	return render(request, 'main.html')
 
+def myimages(request):
+	from .models import Poster
+	posters = Poster.objects.all()
+
+	return render(request, 'myimages.html', {'posters': posters})
+
 def index(request):
 	from .models import Poster
 	posters = Poster.objects.all()

@@ -2,7 +2,7 @@ html, body{
 	background-color: #f4f4f4;
 	margin: 0px;
 	padding: 0px;
-    height: auto;
+    height: 100%;
     width: auto;
 	overflow-y: auto;
 }
@@ -10,15 +10,17 @@ html, body{
 img {
 	max-width: 100%;
     max-height: 100%;
-	display: block;
-	margin: auto;
 }
 
 @keyframes animatedBackground {
     from { background-position: 0 0; }
     to { background-position: 100% 0; }
 }
-
+.ui.visible.uncover.sidebar{
+    min-height: 100%!important;
+    height: auto!important;
+    overflow-y: auto!important;
+}
 #animate-area   { 
     width: 100%; 
     height: 100%; 
@@ -33,8 +35,8 @@ img {
 	display: inline-block;
 	background-color: #ffffff;
 	border-bottom: 2px solid #e0e0e0;
+    position: relative;
 	margin: auto;
-	padding-right: 30%;
 }
 
 @media only screen and (min-width: 450px) {
@@ -64,8 +66,17 @@ img {
 	float: left;
 }
 
+.main_buttons {
+    position: inline-block;
+    vertical-align: center;
+    left: 20%;
+}
+
 .logo1 {
+    position: relative;
 	display: inline-block;
+    vertical-align: middle;
+    left: 20%;
 }
 
 #logoid {
@@ -73,15 +84,11 @@ img {
 	margin: auto;
 }
 
-.letsupload {
-	max-height: 10px;
-	max-width: 10px;
-}
 
 .fileUpload {
     display: inline-block;
     cursor: pointer; 
-    padding: 5px 8px; 
+    padding: 10px;
     background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
     background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
     background: -o-linear-gradient(top, #f3f3f3, #dddddd);
@@ -99,16 +106,23 @@ img {
     position: relative;
     overflow: hidden;
     margin-top: 20px;
+    margin-left: 30%;
+
+}
+
+.background_image {
+    display: inline-block;
+}
+
+.background_image img {
+    size: 100%;
 }
 
 .fileUpload input.upload {
     display: inline-block;
     vertical-align: middle;
     position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
+    margin: auto;
     font-size: 20px;
     cursor: pointer;
     opacity: 0;
@@ -118,6 +132,7 @@ img {
 .uploading{
     display: inline-block;
     vertical-align: middle;
+    width: 100%;
 }
 
 .search {
@@ -139,6 +154,21 @@ img {
 */
 }
 
+.card {
+
+}
+
+.card2 {
+    display: inline-block;
+    width: 100px;
+    margin: 2.5px;
+}
+.card2 img {
+    width: 100px;
+    height: 180px;
+    display: inline-block;
+    margin: 10px;
+}
 .confirm{
     display: inline-block;
     vertical-align: middle;
@@ -167,6 +197,7 @@ img {
 
 .login {
 	display: inline-block;
+    float: right;
 }
 
 
@@ -192,8 +223,8 @@ img {
     float: left;
     font-size: 1.2em;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 20%;
+    left: 20%;
     z-index: 99999;
     box-shadow: 0px 0px 20px #999;
     /* CSS3 */

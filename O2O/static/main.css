@@ -198,7 +198,11 @@ img {
 .login {
 	display: inline-block;
     float: right;
+    vertical-align: middle;
+    margin-top: 7px;
+    margin-right: 10px;
 }
+
 
 
 /* Mask for background, by default is not display */

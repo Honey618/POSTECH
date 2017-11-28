@@ -99,7 +99,6 @@ def feedback_upload(request):
 			print(request.session['username'])
 
 			poster = feedback_form.feedback_upload(username=request.session['username'])
-			
 			if poster:
 				return render(request, 'main.html')
 

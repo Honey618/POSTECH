@@ -49,7 +49,7 @@ class FeedbackForm(forms.Form):
 	
 	eventname = forms.CharField()
 	eventdate = forms.CharField()
-	evnetenddate = forms.CharField()
+	eventenddate = forms.CharField()
 	eventtext = forms.CharField()
 
 	def feedback_upload(self, username):

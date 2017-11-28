@@ -22,6 +22,42 @@ SCOPES = 'https://www.googleapis.com/auth/calendar'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
+def create_event(data):
+
+    credentials = get_credentials()
+    http = credentials.authorize(httplib2.Http())
+    service = discovery.build('calendar', 'v3', http=http)
+
+    event = {
+      'summary': data['summary'],
+      'location': data['location'],
+      'description': data['description'],
+      'start': {
+        'dateTime': data['strat']+'T09:00:00',
+        'timeZone': 'Asia/Seoul',
+      },
+      'end': {
+        'dateTime': data['end']+'T17:00:00',
+        'timeZone': 'Asia/Seoul',
+      },
+      'recurrence': [
+        #'RRULE:FREQ=DAILY;COUNT=2'
+      ],
+      'attendees': [
+        #{'email': 'lpage@example.com'},
+        #{'email': 'sbrin@example.com'},
+      ],
+      'reminders': {
+        'useDefault': False,
+        'overrides': [
+          #{'method': 'email', 'minutes': 24 * 60},
+          #{'method': 'popup', 'minutes': 10},
+        ],
+      },
+    }
+
+    event = service.events().insert(calendarId='primary', body=event).execute()
+    print ('Event created: %s' % (event.get('htmlLink')))  
 
 def get_credentials():
     """Gets valid user credentials from storage.
@@ -76,8 +112,6 @@ def main():
     for event in events:
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
-    '''
-    
     event = {
       'summary': 'Example I/O 2017',
       'location': 'My home',
@@ -105,9 +139,13 @@ def main():
         ],
       },
     }
+
+
+    '''
     
-    event = service.events().insert(calendarId='primary', body=event).execute()
-    print ('Event created: %s' % (event.get('htmlLink')))
+
+    create_event(data)
+
 
 
 if __name__ == '__main__':

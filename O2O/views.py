@@ -42,6 +42,7 @@ def sign_up(request):
 			else:
 				# TODO: 에러 처리 해줘야함
 				return redirect('/index')
+		return redirect('/index')
 
 def login(request):
 	if request.method == 'GET':
@@ -54,17 +55,19 @@ def login(request):
 			user = user_form.login()
 
 			if user:
-				print('2')
 				request.session['username'] = user.username
 				
 				print(request.session['username'])
 
 				# del request.session['username']
-
-				return redirect('/index')
+				return render(request, 'main.html', {'user.username': user.username})
+#				return redirect('/index')
 
 			else:
-				return redirect('/index')
+				print(user.username)
+				return render(request, 'main.html', {'user.username': user.username})
+#				return redirect('/index')
+		return redirect('/index')
 
 def file_upload(request):
 	if request.method == 'GET':

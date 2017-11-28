@@ -9,6 +9,7 @@ class UserForm(forms.Form):
 		if User.objects.filter(
 			username=self.cleaned_data['username']
 		).exists():
+			raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
 			return False
 
 		user = User(
@@ -26,6 +27,7 @@ class UserForm(forms.Form):
 		)
 
 		if not user_list:
+			raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
 			return False
 
 		else:

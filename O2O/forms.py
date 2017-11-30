@@ -52,15 +52,15 @@ class FeedbackForm(forms.Form):
 	eventenddate = forms.CharField()
 	eventtext = forms.CharField()
 
-	def feedback_upload(self, username):
+	def feedback_upload(self, username, posterId):
 		from .models import User, Poster
 
-		
-		poster = Poster.objects.filter(user__username=username).update(
-			eventname=self.cleaned_data['eventname'],
-			eventdate=self.cleaned_data['eventdate'],
-			eventenddate=self.cleaned_data['eventenddate'],
-			eventtext=self.cleaned_data['eventtext'],
-		)
+		poster = Poster.objects.get(id=posterId)
+
+		poster.eventname=self.cleaned_data['eventname']
+		poster.eventdate=self.cleaned_data['eventdate']
+		poster.eventenddate=self.cleaned_data['eventenddate']
+		poster.eventtext=self.cleaned_data['eventtext']
+		poster.save()
 
 		return poster

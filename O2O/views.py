@@ -112,6 +112,8 @@ def feedback_upload(request):
 			data['end'] = poster.eventenddate
 			#print(data)
 
+
+			create_event(data,request.session['username'])
 			
 			if poster:
 				create_event(data)

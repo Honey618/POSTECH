@@ -79,6 +79,7 @@ def file_upload(request):
 		picture_upload_form = PictureUploadForm(request.POST, request.FILES)
 		if picture_upload_form.is_valid():
 			poster = picture_upload_form.file_upload(username=request.session['username'])
+			print(poster)
 			result = evnt_parser(detect_document(settings.BASE_DIR+poster.file.url))
 			if poster:
 				return render(request, 'main.html', {'result': result, 'posterId' : poster.id})
@@ -102,10 +103,19 @@ def feedback_upload(request):
 
 			poster = feedback_form.feedback_upload(username=request.session['username'], posterId=request.POST['posterid'])
 			print(poster.file.url)
+			#poster = feedback_form.feedback_upload(username=request.session['username'])
+			data={}
+			data['summary'] = poster.eventname
+			data['location'] = ""
+			data['description'] = poster.eventtext
+			data['strat'] = poster.eventdate
+			data['end'] = poster.eventenddate
+			#print(data)
 
 			
 			if poster:
-				return render(request, 'main.html')
+				create_event(data)
+			return render(request, 'main.html')
 
 
 		else:

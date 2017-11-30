@@ -12,7 +12,7 @@ import datetime
 
 try:
     import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+    flags = tools.argparser.parse_args([])
 except ImportError:
     flags = None
 
@@ -93,10 +93,11 @@ def main():
     Creates a Google Calendar API service object and outputs a list of the next
     10 events on the user's calendar.
     """
+    '''
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('calendar', 'v3', http=http)
-    
+    '''
     '''
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
     

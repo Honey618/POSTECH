@@ -113,10 +113,10 @@ def feedback_upload(request):
 			#print(data)
 
 
-			create_event(data,request.session['username'])
+			
 			
 			if poster:
-				create_event(data)
+				create_event(data,request.session['username'])
 			return render(request, 'main.html')
 
 

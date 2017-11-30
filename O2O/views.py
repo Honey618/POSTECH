@@ -9,7 +9,9 @@ from django.conf import settings
 from .forms import UserForm, PictureUploadForm, FeedbackForm
 from .parser.detect import *
 from .parser.parser import *
-#from .calendar.quickstart import *
+
+from .calendar.quickstart import *
+
 
 def main(request):
 	return render(request, 'main.html')
@@ -99,22 +101,15 @@ def feedback_upload(request):
 			print(request.session['username'])
 
 			poster = feedback_form.feedback_upload(username=request.session['username'])
-			'''
-			data={}
-			data['summary']=poster.eventname
-			data['location']="MY HOME"
-			data['start']=poster.eventdate
-			data['end']=poster.eventenddate
-			data['description']=poster.eventtext
-'''
-			#create_event(data)
+
+			create_event(data)
+			
 			if poster:
 				return render(request, 'main.html')
+
 
 		else:
 			print(feedback_form.errors)
 
 
-
 		return redirect('/index')
-

@@ -8,6 +8,9 @@ from oauth2client import client, file
 from oauth2client import tools
 from oauth2client.file import Storage
 
+from dateutil import parser            
+from datetime import datetime 
+
 import datetime
 
 try:
@@ -22,7 +25,6 @@ SCOPES = 'https://www.googleapis.com/auth/calendar'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
-print("Current folder: " + os.getcwd())
 
 def create_event(data, u_name):
 
@@ -59,6 +61,9 @@ def create_event(data, u_name):
 
     event = service.events().insert(calendarId='primary', body=event).execute()
     print ('Event created: %s' % (event.get('htmlLink')))  
+
+def date_trans(s):
+    return parser.parse(s).strftime('%Y/%m/%d')
 
 def get_credentials(user):
     """Gets valid user credentials from storage.

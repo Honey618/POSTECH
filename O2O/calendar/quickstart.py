@@ -4,7 +4,7 @@ import httplib2
 import os
 
 from apiclient import discovery
-from oauth2client import client
+from oauth2client import client, file
 from oauth2client import tools
 from oauth2client.file import Storage
 
@@ -22,12 +22,13 @@ SCOPES = 'https://www.googleapis.com/auth/calendar'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
-def create_event(data):
+print("Current folder: " + os.getcwd())
 
-    credentials = get_credentials()
+def create_event(data, u_name):
+
+    credentials = get_credentials(u_name)
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('calendar', 'v3', http=http)
-
     event = {
       'summary': data['summary'],
       'location': data['location'],
@@ -59,7 +60,7 @@ def create_event(data):
     event = service.events().insert(calendarId='primary', body=event).execute()
     print ('Event created: %s' % (event.get('htmlLink')))  
 
-def get_credentials():
+def get_credentials(user):
     """Gets valid user credentials from storage.
 
     If nothing has been stored, or if the stored credentials are invalid,
@@ -69,12 +70,10 @@ def get_credentials():
         Credentials, the obtained credential.
     """
     home_dir = os.path.expanduser('~')
-    credential_dir = os.path.join(home_dir, '.credentials')
+    credential_dir = os.path.join(home_dir, '.credentials/POSTECH')
     if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
-    credential_path = os.path.join(credential_dir,
-                                   'calendar-python-quickstart.json')
-
+    credential_path = os.path.join(credential_dir, str(user)+'.json')
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:

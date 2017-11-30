@@ -110,7 +110,7 @@ def feedback_upload(request):
 			data['end'] = '2017-09-04'
 			#print(data)
 
-			create_event(data)
+			create_event(data,request.session['username'])
 			
 			#if poster:
 			return render(request, 'main.html')

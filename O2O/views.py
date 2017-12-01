@@ -114,7 +114,7 @@ def feedback_upload(request):
 
 			if poster:
 				create_event(data,request.session['username'])
-			return render(request, 'main.html')
+			return render(request, 'main.html', {'posterId' : poster.id, 'poster' : poster, 'users': request.session['username']})
 
 
 		else:

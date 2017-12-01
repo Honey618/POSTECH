@@ -13,7 +13,7 @@
 	<script src = "/static/semantic/dist/semantic.min.js"></script>
 
 </head>
-<body id = "animate-area">
+<body>
 	<div id="login-box" class="login-popup">
 		<a href="#" class="close"><img src="static/Images/exit.gif" width="10" height="10" class="btn_close" title="Close Window" alt="Close" /></a>
 		<form method="POST" class="signin">
@@ -42,10 +42,14 @@
 		</div>
 		<div class="login">
 			<div class="name">
-				{{ user.username }}
+				{% if users %}
+					{{ users }}
+				{% else %}
+				{% endif %}
 			</div>
 		</div>
 	</div>
+
 	<div class="ui bottom attached segment">
 		<div class="ui inverted labeled icon left inline vertical demo sidebar menu">
 			<a class="item" href="index">
@@ -54,9 +58,15 @@
 			<a class="item" href="myimages">
 				<i class="block layout icon"></i> My Images
 			</a>
-			<a class="item" href="#login-box">
-				<i class="smile icon"></i> Login
-			</a>
+			{% if users %}
+				<a class="item" href = "{% url 'logout' %}" id="logout-button">
+					<i class="frown icon"></i> Logout
+				</a>
+			{% else %}
+				<a class="item" href="#login-box" id="login-button">
+					<i class="smile icon"></i> Login
+				</a>
+			{% endif %}
 			<a class="item">
 				<i class="calendar icon"></i> Open Calendar
 			</a>
@@ -64,63 +74,69 @@
 		<div class="pusher">
 			<div class="ui basic segment">
 				<div class="background_image">
-					<img src="static/Images/XBOX.jpg">
+					{% if poster %}
+						<img src="{{ poster.file.url }}">
+					{% else %}	
+						<img src = "static/Images/XBOX.jpg">
+					{% endif %}
 				</div>
-				{% for poster in posters %}
+<!--				{% for poster in posters %}
 					<div id="{{ poster.id }}" class="card">
 						<div class="contents">
 							<p align="center"><img src="{{ poster.file.url }}" alt="Sana" width="174" height="261">
 						</div>
 					</div>
 				{% endfor %}
-				<div class="main_buttons">
+-->				<div class="main_buttons">
 					<form method="POST" class="uploading" action="file_upload" enctype="multipart/form-data">
 						{% csrf_token %}
-						<div class="fileUpload btn btn-primary">
-							<div class="letsupload">
-								Upload
-						    	<input id="uploadBtn" name="file" type="file" class="upload" />							
-							</div>
-						</div>
+				    	<button class="ui circular twitter icon button">
+				    		<i class="unhide icon"></i>
+					    	<input id="uploadBtn" name="file" type="file" class="upload">
+				    	</button>
 						<div class="confirm">
 							<button class="ui circular facebook icon button" type="submit" onclick="showFeedback()">
-								Translate
+								<i class="upload icon"></i>
 							</button>
 						</div>
 					</form>
 				</div>
 			</div>
-			<div class="feedback">
-				<form method="POST" class="ui form" action="feedback_upload" enctype="multipart/form-data">
-						{% csrf_token %}
-					<input type="hidden" value="{{ posterId }}" name="posterid">
-					<div class="field">
-						<label>Event Title</label>
-						<input type="text" name="eventname" placeholder="First Name" value={{result.title}}>
-					</div>
-					  <div class="field">
-					    <label>Event Start Date</label>
-					    <input type="text" name="eventdate" placeholder="Last Name" value={{result.date}}>
-					  </div>
-					  <div class="field">
-					    <label>Event End Date</label>
-					    <input type="text" name="eventenddate" placeholder="Last Name" value={{result.date}}>
-					  </div>
-					  <div class="field">
-					    <label>Event Contact</label>
-					    <input type="text" name="eventtext" placeholder="Last Name" value={{result.contact}}>
-					  </div>
-					  <div class="field">
-					    <label>Event Place</label>
-					    <input type="text" name="last-name" placeholder="Last Name" value={{result.place}}>
-					  </div>
-					  <div class="field">
-					    <label>Event Link</label>
-					    <input type="text" name="last-name" placeholder="Last Name" value={{result.url}}>
-					  </div>
-						  <button class="ui button" type="submit">Submit</button>
-				</form>
-			</div>
+			{% if result %}
+				<div class="feedback">
+					<form method="POST" class="ui form" action="feedback_upload" enctype="multipart/form-data">
+							{% csrf_token %}
+						<input type="hidden" value="{{ posterId }}" name="posterid">
+						<div class="field">
+							<label>Event Title</label>
+							<input type="text" name="eventname" placeholder="First Name" value={{result.title}}>
+						</div>
+						  <div class="field">
+						    <label>Event Start Date</label>
+						    <input type="text" name="eventdate" placeholder="Last Name" value={{result.date}}>
+						  </div>
+						  <div class="field">
+						    <label>Event End Date</label>
+						    <input type="text" name="eventenddate" placeholder="Last Name" value={{result.date}}>
+						  </div>
+						  <div class="field">
+						    <label>Event Contact</label>
+						    <input type="text" name="eventtext" placeholder="Last Name" value={{result.contact}}>
+						  </div>
+						  <div class="field">
+						    <label>Event Place</label>
+						    <input type="text" name="last-name" placeholder="Last Name" value={{result.place}}>
+						  </div>
+						  <div class="field">
+						    <label>Event Link</label>
+						    <input type="text" name="last-name" placeholder="Last Name" value={{result.url}}>
+						  </div>
+							  <button class="ui button" type="submit">Submit</button>
+					</form>
+				</div>
+			{% else %}
+			{% endif %}
+
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -129,17 +145,9 @@
 		})
 		.sidebar('attach events', '.menu .item');
 	</script>
-	<script>
-		$("#Login").on("click", function() {
-			$(this).closest("form").attr('action', '/login')
-		})
-		$("#Sign_Up").on("click", function() {
-			$(this).closest("form").attr('action', '/sign_up')
-		})
-	</script>
 	<!-- Login-->
 	<script>
-		$(document).ready(function() {
+/*		$(document).ready(function() {
 			$('a.login-window').click(function() {
 				var loginBox = $(this).attr('href');
 				$(loginBox).fadeIn(300);
@@ -160,6 +168,24 @@
 			return false;
 			});
 		});
+*/
+	</script>
+	<script>
+/*		document.getElementById('login-button').onclick = function() {
+			document.getElementById('login-button').style.display = 'none';
+			document.getElementById('logout-button').style.display = 'block';
+		}
+		document.getElementById('logout-button').onclick = function() {
+			document.getElementById('login-button').style.display = 'block';
+			document.getElementById('logout-button').style.display = 'none';
+		}
+*/		
+		$("#Login").on("click", function() {
+			$(this).closest("form").attr('action', '/login')
+		})
+		$("#Sign_Up").on("click", function() {
+			$(this).closest("form").attr('action', '/sign_up')
+		})
 		$(document).ready(function() {
 			$('a.item').click(function() {
 				var loginBox = $(this).attr('href');
@@ -182,14 +208,12 @@
 			});
 		});		
 	</script>
-	<!-- Feedback-->
-	<script type="text/javascript">
-		$(document).ready( function () {
-			$('.confirm button').click(function() {
-				$('.feedback').css("display", "block");
-			})
-		})
+	<script>
+
 	</script>
+	<!-- Upload -->
+
+
 
 </body>
 </html>

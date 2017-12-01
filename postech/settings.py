@@ -31,13 +31,13 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'O2O',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'O2O',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +123,6 @@ STATICFILES_DIRS = [ 'static' ]
 MEDIA_URL = '/media/'
 print(BASE_DIR)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Auth settings
+LOGIN_REDIRECT_URL = '/index'

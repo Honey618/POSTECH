@@ -20,7 +20,7 @@ def myimages(request):
 	from .models import Poster
 	posters = Poster.objects.all()
 
-	return render(request, 'myimages.html', {'posters': posters})
+	return render(request, 'myimages.html', {'users': request.session['username'], 'posters': posters})
 
 def index(request):
 	from .models import Poster
@@ -62,12 +62,12 @@ def login(request):
 				print(request.session['username'])
 
 				# del request.session['username']
-				return render(request, 'main.html', {'user.username': user.username})
+				return render(request, 'main.html', {'users': request.session['username']})
 #				return redirect('/index')
 
 			else:
 				print(user.username)
-				return render(request, 'main.html', {'user.username': user.username})
+				return render(request, 'main.html', {'users': request.session['username']})
 #				return redirect('/index')
 		return redirect('/index')
 
@@ -82,13 +82,13 @@ def file_upload(request):
 			print(poster)
 			result = evnt_parser(detect_document(settings.BASE_DIR+poster.file.url))
 			if poster:
-				return render(request, 'main.html', {'result': result, 'posterId' : poster.id})
+				return render(request, 'main.html', {'result': result, 'posterId' : poster.id, 'poster' : poster, 'users': request.session['username']})
 
 		else:
 			print(picture_upload_form.errors)
 
 		# error handling
-		return redirect('/index')
+		return render(request, 'main.html', {'users': request.session['username']})
 
 def feedback_upload(request):
 	if request.method == 'GET':
@@ -111,12 +111,9 @@ def feedback_upload(request):
 			data['strat'] = poster.eventdate
 			data['end'] = poster.eventenddate
 			#print(data)
-
-
-			create_event(data,request.session['username'])
 			
 			if poster:
-				create_event(data)
+				create_event(data,request.session['username'])
 			return render(request, 'main.html')
 
 

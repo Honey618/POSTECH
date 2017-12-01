@@ -24,25 +24,8 @@
 			</a>
 		</div>
 		<div class="login">
-			<a href="#login-box" class="login-window">
-				<img alt="Login" src="static/Images/login.gif" width="33" height="33">
-			</a>
-			<div id="login-box" class="login-popup">
-				<a href="#" class="close"><img src="static/Images/exit.gif" width="10" height="10" class="btn_close" title="Close Window" alt="Close" /></a>
-				<form method="POST" class="signin">
-				{% csrf_token %}
-					<fieldset class="textbox">
-						<label class="username">
-							<span>Username</span>
-							<input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
-						</label>
-						<button class="submit button" type="submit" id="Login">Login</button>
-						<button class="submit button" type="submit" id="Sign_Up">Sign Up</button>
-						<!-- <p> -->
-							<!-- <a class="forgot" href="Shinsta.html">Forgot your password?</a> -->
-						<!-- </p>         -->
-					</fieldset>
-				</form>
+			<div class="name">
+				{{ users }}
 			</div>
 		</div>
 	</div>

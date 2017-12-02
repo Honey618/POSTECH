@@ -1,8 +1,10 @@
-from ex import example
+from dateutil import parser
+from datetime import datetime
 
-def register():
-    data=example()
-    print(data)
+
+
+def dcal(s):
+    return parser.parse(s).strftime('%Y/%m/%d')    
 
 
 #register()

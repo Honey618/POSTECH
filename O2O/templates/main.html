@@ -96,7 +96,9 @@
 						    </label>
 
 						    <input id="file-input" class="upload" name="file" type="file" style="display:none"/>
-						    <div class="ui left pointing red basic label" id="file-name"></div>
+						    <div class="ui left pointing red basic label" id="file-name">
+						    	{{poster.file.url}}
+						    </div>
 						</div>
 
 						<div class="confirm uploadBtn" style="display:none">
@@ -107,8 +109,9 @@
 					</form>
 				</div>
 			</div>
-			{% if result %}
-				<div class="feedback ui basic segment">
+			<div class="feedback ui basic segment">
+				{% if result %}
+				
 					<form method="POST" class="ui form" action="feedback_upload" enctype="multipart/form-data">
 							{% csrf_token %}
 						<input type="hidden" value="{{ posterId }}" name="posterid">
@@ -136,9 +139,10 @@
 						  </div>
 							  <button class="ui button" type="submit">Submit</button>
 					</form>
-				</div>
+				
 			{% else %}
 			{% endif %}
+			</div>
 
 		</div>
 		<div style="height: 10px"></div>
@@ -217,6 +221,9 @@
 			console.log("aaa")
 			$("#file-name").text($("#file-input").val())
 			$("#submitBtn").click()
+		})
+		$("#submitBtn").click(function() {
+			$(".bottom").addClass("loading")
 		})
 
 	</script>

@@ -23,6 +23,7 @@ class Poster(models.Model):
             blank=True, null=True)
     eventenddate = models.DateTimeField(
             blank=True, null=True)
+    eventplace = models.CharField(max_length = 50, null=True)
     eventtext = models.TextField()
     file = models.ImageField()
 

@@ -51,6 +51,7 @@ class FeedbackForm(forms.Form):
 	eventdate = forms.CharField()
 	eventenddate = forms.CharField()
 	eventtext = forms.CharField()
+	eventplace = forms.CharField()
 
 	def feedback_upload(self, username, posterId):
 		from .models import User, Poster
@@ -60,6 +61,7 @@ class FeedbackForm(forms.Form):
 		poster.eventname=self.cleaned_data['eventname']
 		poster.eventdate=self.cleaned_data['eventdate']
 		poster.eventenddate=self.cleaned_data['eventenddate']
+		poster.eventplace=self.cleaned_data['eventplace']
 		poster.eventtext=self.cleaned_data['eventtext']
 		poster.save()
 

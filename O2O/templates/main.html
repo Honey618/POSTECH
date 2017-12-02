@@ -114,23 +114,24 @@
 						<input type="hidden" value="{{ posterId }}" name="posterid">
 						<div class="field">
 							<label>Event Title</label>
-							<input type="text" name="eventname" placeholder="Title" value={{result.title}}>
+
+							<input type="text" name="eventname" placeholder="Title" value={{result.title.0}}>
 						</div>
 						  <div class="field">
 						    <label>Event Start Date</label>
-						    <input type="text" name="eventdate" placeholder="Start Date" value={{result.date}}>
+						    <input type="text" name="eventdate" placeholder="Start Date" value={{result.date.0}}>
 						  </div>
 						  <div class="field">
 						    <label>Event End Date</label>
-						    <input type="text" name="eventenddate" placeholder="End Date" value={{result.date}}>
+						    <input type="text" name="eventenddate" placeholder="End Date" value={{result.date.0}}>
 						  </div>
 						  <div class="field">
 						    <label>Event Place</label>
-						    <input type="text" name="eventplace" placeholder="Place" value={{result.place}}>
+						    <input type="text" name="eventplace" placeholder="Place" value={{result.place.0}}>
 						  </div>
 						  <div class="field">
 						    <label>Event Discription</label>
-						    <textarea name="textarea" placeholder="Discription" value={{result.url}}></textarea>
+						    <textarea name="textarea" placeholder="Discription" value={{result.url.0}}></textarea>
 						
 						  </div>
 							  <button class="ui button" type="submit">Submit</button>

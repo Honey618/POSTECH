@@ -14,6 +14,21 @@ def include(element, lst):
             return True
     return False
 
+def datecut(s):
+    tmp1=""
+    tmp2=""
+    for i in range(len(s)):
+        if(s[i]>='0' and s[i]<='9'):
+            tmp1=s[i:]
+            break;
+    for i in range(len(tmp1)):
+        I = len(tmp1)-1-i
+        print(tmp1[I])
+        if(tmp1[I]>='0' and tmp1[I]<='9'):
+            tmp2=tmp1[:I+1]
+            break;
+    return tmp2
+
 def parse_list(contentList):
 	content=[]
 	for c in contentList:

@@ -108,33 +108,30 @@
 				</div>
 			</div>
 			{% if result %}
-				<div class="feedback">
+				<div class="feedback ui basic segment">
 					<form method="POST" class="ui form" action="feedback_upload" enctype="multipart/form-data">
 							{% csrf_token %}
 						<input type="hidden" value="{{ posterId }}" name="posterid">
 						<div class="field">
 							<label>Event Title</label>
-							<input type="text" name="eventname" placeholder="First Name" value={{result.title}}>
+							<input type="text" name="eventname" placeholder="Title" value={{result.title}}>
 						</div>
 						  <div class="field">
 						    <label>Event Start Date</label>
-						    <input type="text" name="eventdate" placeholder="Last Name" value={{result.date}}>
+						    <input type="text" name="eventdate" placeholder="Start Date" value={{result.date}}>
 						  </div>
 						  <div class="field">
 						    <label>Event End Date</label>
-						    <input type="text" name="eventenddate" placeholder="Last Name" value={{result.date}}>
-						  </div>
-						  <div class="field">
-						    <label>Event Contact</label>
-						    <input type="text" name="eventtext" placeholder="Last Name" value={{result.contact}}>
+						    <input type="text" name="eventenddate" placeholder="End Date" value={{result.date}}>
 						  </div>
 						  <div class="field">
 						    <label>Event Place</label>
-						    <input type="text" name="last-name" placeholder="Last Name" value={{result.place}}>
+						    <input type="text" name="last-name" placeholder="Place" value={{result.place}}>
 						  </div>
 						  <div class="field">
-						    <label>Event Link</label>
-						    <input type="text" name="last-name" placeholder="Last Name" value={{result.url}}>
+						    <label>Event Discription</label>
+						    <textarea name="textarea" placeholder="Discription" value={{result.url}}></textarea>
+						
 						  </div>
 							  <button class="ui button" type="submit">Submit</button>
 					</form>

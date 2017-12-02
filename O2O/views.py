@@ -18,15 +18,21 @@ def main(request):
 
 def myimages(request):
 	from .models import Poster
-	posters = Poster.objects.filter(id=user)
+#	posters = Poster.objects.filter(id=user)
+	posters = Poster.objects.all()
 
 	return render(request, 'myimages.html', {'users': request.session['username'], 'posters': posters})
+
+def info(request):
+	from .models import Poster
+
+	return render(request, 'info.html', {'users': request.session['username'], 'posters': posters})
 
 def index(request):
 	from .models import Poster
 	posters = Poster.objects.all()
 
-	return render(request, 'main.html', {'posters': posters})
+	return render(request, 'main.html', {'users': request.session['username'], 'posters': posters})
 
 def sign_up(request):
 	if request.method == 'GET':

@@ -1,6 +1,11 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+import time
+
+#processing start
+
+start_time = time.time()
 
 img1 = cv2.imread('test2.jpeg',0)          # queryImage
 img2 = cv2.imread('test2.jpg',0) # trainImage
@@ -15,9 +20,18 @@ bf = cv2.BFMatcher()
 matches = bf.knnMatch(des1,des2, k=2)
 # Apply ratio test
 good = []
+
 for m,n in matches:
-    if m.distance < 0.75*n.distance:
+    if m.distance < 0.7*n.distance:
         good.append([m])
+print(len(good))
+#processing end
+
+end_time = time.time()
+#print processing time
+
+print (end_time - start_time)
+
 # cv2.drawMatchesKnn expects list of lists as matches.
-img3 = cv2.drawMatchesKnn(img1,kp1,img2,kp2,good,None,flags=2)
-plt.imshow(img3),plt.show()
+#img3 = cv2.drawMatchesKnn(img1,kp1,img2,kp2,good,None,flags=2)
+#plt.imshow(img3),plt.show()

@@ -90,13 +90,18 @@
 -->				<div class="main_buttons">
 					<form method="POST" class="uploading" action="file_upload" enctype="multipart/form-data">
 						{% csrf_token %}
-				    	<button class="ui circular twitter icon button">
-				    		<i class="unhide icon"></i>
-					    	<input id="uploadBtn" name="file" type="file" class="upload">
-				    	</button>
-						<div class="confirm">
-							<button class="ui circular facebook icon button" type="submit" onclick="showFeedback()">
-								<i class="upload icon"></i>
+						<div class="uploadBtn">
+    						<label class="ui circular button" for="file-input">
+						        사진 올리기
+						    </label>
+
+						    <input id="file-input" class="upload" name="file" type="file" style="display:none"/>
+						    <div class="ui left pointing red basic label" id="file-name"></div>
+						</div>
+
+						<div class="confirm uploadBtn" style="display:none">
+							<button class="ui circular icon button" id="submitBtn" type="submit">
+								사진 번역하기
 							</button>
 						</div>
 					</form>
@@ -138,6 +143,7 @@
 			{% endif %}
 
 		</div>
+		<div style="height: 70px"></div>
 	</div>
 	<script type="text/javascript">
 		$('.ui.sidebar').sidebar({
@@ -209,6 +215,11 @@
 		});		
 	</script>
 	<script>
+		$("#file-input").change(function(){
+			console.log("aaa")
+			$("#file-name").text($("#file-input").val())
+			$("#submitBtn").click()
+		})
 
 	</script>
 	<!-- Upload -->

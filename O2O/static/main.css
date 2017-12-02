@@ -73,6 +73,19 @@ img {
 	margin: auto;
 }
 
+.confirm {
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+}
+
+.uploadBtn{
+    display: inline-block;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
 
 .fileUpload {
     display: inline-block;
@@ -164,11 +177,7 @@ input.upload {
     display: inline-block;
     margin: 10px;
 }
-.confirm{
-    display: inline-block;
-    vertical-align: middle;
-    margin-top: 21px;
-}
+
 
 
 .button {
@@ -313,6 +322,7 @@ form.signin input::-webkit-input-placeholder {
     font: 12px;
     width: 80px;
 }
+
 .forgot{
 	color: #000000;
 }

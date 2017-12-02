@@ -76,6 +76,8 @@ def file_upload(request):
 		return redirect('/index')
 
 	else :
+
+		print(request)
 		picture_upload_form = PictureUploadForm(request.POST, request.FILES)
 		if picture_upload_form.is_valid():
 			poster = picture_upload_form.file_upload(username=request.session['username'])
@@ -85,6 +87,7 @@ def file_upload(request):
 				return render(request, 'main.html', {'result': result, 'posterId' : poster.id, 'poster' : poster, 'users': request.session['username']})
 
 		else:
+
 			print(picture_upload_form.errors)
 
 		# error handling

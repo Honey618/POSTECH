@@ -17,17 +17,19 @@ def evnt_parser(contentList):
 	listSize = sorted(contentList, key=itemgetter('size'), reverse=True) 
 
 	print("Supposed to Title : {}".format(listSize[0]["content"]))
+
 	return({"title": [listSize[0]["content"]], "date": detect_date(listSize), "url": detect_url(listSize), "contact": detect_contact(listSize), "place": detect_place(listSize)})
 
 def detect_date(contentList):
-    sample1 = ['기간', '2017', '일시', '날짜', '언제', 'when', '일정']
+    sample1 = ['기간', '일시', '날짜', '언제', 'when', '일정']
+    sample5 = ['2017', '2018']
     sample2 = ['.','-','/','~']
     sample3 = ['mon', 'tue', 'wed', 'thu', 'thur', 'fri', 'sat', 'sun']
     sample4 = ['(월)','(화)','(수)','(목)','(금)','(토)','(일)']
     result = []
     for block in contentList:
         e= block['content']
-        count=include(e, sample1)+include(e, sample2)+include(e, sample3)+include(e, sample4)
+        count=include(e, sample1)+include(e, sample2)+include(e, sample3)+include(e, sample4)+include(e, sample5)
         if(count>0):
             result.append([e,count])
     result= sorted(result, key=lambda tup: tup[1], reverse=True)

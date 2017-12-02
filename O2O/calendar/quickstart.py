@@ -61,6 +61,7 @@ def create_event(data, u_name):
 
     event = service.events().insert(calendarId='primary', body=event).execute()
     print ('Event created: %s' % (event.get('htmlLink')))  
+    return(event.get('htmlLink'))
 
 def date_trans(s):
     return parser.parse(s).strftime('%Y/%m/%d')

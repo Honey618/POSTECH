@@ -91,12 +91,24 @@
 					<form method="POST" class="uploading" action="file_upload" enctype="multipart/form-data">
 						{% csrf_token %}
 						<div class="uploadBtn">
-    						<label class="ui circular button" for="file-input">
+							{% if resultLink %}
+							<label class="ui circular button" for="file-input">
+						        새 사진 올리기
+						    </label>
+							{% else %}	
+							<label class="ui circular button" for="file-input">
 						        사진 올리기
 						    </label>
+							{% endif %}
+    						
 
 						    <input id="file-input" class="upload" name="file" type="file" style="display:none"/>
-						    <div class="ui left pointing red basic label" id="file-name"></div>
+							{% if poster %}
+						    <div class="ui left pointing red basic label" id="file-name">
+						    	{{poster.file.url}}
+						    </div>
+						    {% else %}
+							{% endif %}
 						</div>
 
 						<div class="confirm uploadBtn" style="display:none">
@@ -106,9 +118,17 @@
 						</div>
 					</form>
 				</div>
+				{% if resultLink %}
+			<div class="ui message">
+			  
+			  <p><a href={{resultLink}}>링크</a>에 가서 이벤트 등록을 완료하세요.</p>
+			</div>
+			{% else %}
+			{% endif %}
 			</div>
 			{% if result %}
-				<div class="feedback ui basic segment">
+			<div class="feedback ui basic segment">
+				
 					<form method="POST" class="ui form" action="feedback_upload" enctype="multipart/form-data">
 							{% csrf_token %}
 						<input type="hidden" value="{{ posterId }}" name="posterid">
@@ -119,11 +139,11 @@
 						</div>
 						  <div class="field">
 						    <label>Event Start Date</label>
-						    <input type="text" name="eventdate" placeholder="Start Date" value={{result.date.0}}>
+						    <input type="text" name="eventdate" placeholder="Start Date" value={{result.date.0.0}}>
 						  </div>
 						  <div class="field">
 						    <label>Event End Date</label>
-						    <input type="text" name="eventenddate" placeholder="End Date" value={{result.date.0}}>
+						    <input type="text" name="eventenddate" placeholder="End Date" value={{result.date.0.0}}>
 						  </div>
 						  <div class="field">
 						    <label>Event Place</label>
@@ -136,9 +156,11 @@
 						  </div>
 							  <button class="ui button" type="submit">Submit</button>
 					</form>
-				</div>
+				
+			</div>
 			{% else %}
 			{% endif %}
+			
 
 		</div>
 		<div style="height: 10px"></div>
@@ -215,8 +237,11 @@
 	<script>
 		$("#file-input").change(function(){
 			console.log("aaa")
-			$("#file-name").text($("#file-input").val())
+			//$("#file-name").text($("#file-input").val())
 			$("#submitBtn").click()
+		})
+		$("#submitBtn").click(function() {
+			$(".bottom").addClass("loading")
 		})
 
 	</script>

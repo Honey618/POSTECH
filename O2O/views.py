@@ -121,8 +121,8 @@ def feedback_upload(request):
 			#print(data)
 
 			if poster:
-				create_event(data,request.session['username'])
-			return render(request, 'main.html', {'posterId' : poster.id, 'poster' : poster, 'users': request.session['username']})
+				resultLink = create_event(data,request.session['username'])
+			return render(request, 'main.html', {'posterId' : poster.id, 'poster' : poster, 'users': request.session['username'], 'resultLink' : resultLink})
 
 
 		else:

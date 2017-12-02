@@ -18,7 +18,7 @@ def main(request):
 
 def myimages(request):
 	from .models import Poster
-	posters = Poster.objects.all()
+	posters = Poster.objects.filter(id=user)
 
 	return render(request, 'myimages.html', {'users': request.session['username'], 'posters': posters})
 
@@ -87,7 +87,6 @@ def file_upload(request):
 				return render(request, 'main.html', {'result': result, 'posterId' : poster.id, 'poster' : poster, 'users': request.session['username']})
 
 		else:
-
 			print(picture_upload_form.errors)
 
 		# error handling

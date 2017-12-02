@@ -177,7 +177,25 @@ input.upload {
     display: inline-block;
     margin: 10px;
 }
-
+.button1 {
+    background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
+    background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
+    background: -o-linear-gradient(top, #f3f3f3, #dddddd);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f3f3f3', EndColorStr='#dddddd');
+    border-color: #000;
+    border-width: 1px;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px 6px 4px;
+    margin-top: 10px;
+    margin-left: 15px;
+    font: 12px;
+    width: 80px;
+}
 /*
 
 .button {

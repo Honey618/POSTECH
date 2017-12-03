@@ -50,19 +50,29 @@
 					{% for poster in posters %}
 						{% if poster.eventholder == poster.user.username %}
 
-							<div id="{{ poster.id }}" class="fluid card holder" Configure>
+							<div id="{{ poster.id }}" class="fluid card holder">
 								 <a class="ui red right corner label" style="border-color: rgba(219, 40, 40, 0.63)!important">
         							<i class="configure icon"></i>
       							</a>
 								<div class = "card-image" style="background-image: url({{ poster.file.url }})"></div>
 								<div class = "card-explanation">
-									<p>{{ poster.eventname }}</p>
-									<p>{{ poster.eventdate }}</p>
+									<p name="id" style="display: none">{{ poster.id }}</p>
+
+									<p name="eventname">{{ poster.eventname }}</p>
+									<p name="eventdate">{{ poster.eventdate }}</p>
+									<p name="eventenddate">{{poster.eventenddate}}</p>
+									{% if poster.eventplace %}
+									<p name="eventplace">{{poster.eventplace}}</p>
+									{% endif %}
+									{% if poster.eventplace %}
+									<p name="eventplace">{{poster.text}}</p>
+									{% endif %}
 									<p>{{ poster.attract }}</p>
-									
 								</div>
 							</div>
+							
 						
+										
 						{% else %}
 						<div id="{{ poster.id }}" class="card" >
 								<div class = "card-image" style="background-image: url({{ poster.file.url }})"></div>
@@ -78,23 +88,44 @@
 				</div>
 			
 		</div>
-		<div class="ui modal">
+
+		<div  class="ui modal">
 		  <i class="close icon"></i>
-		  <div class="header">
-		    Modal Title
-		  </div>
-		  <div class="image content">
-		    <div class="image">
-		      An image can appear on left or an icon
-		    </div>
-		    <div class="description">
-		      A description can appear on the right
-		    </div>
-		  </div>
-		  <div class="actions">
-		    <div class="ui button">Cancel</div>
-		    <div class="ui button">OK</div>
-		  </div>
+		  <div class="feedback ui basic segment">
+
+			<form method="POST" class="ui form" action="event_edit" enctype="multipart/form-data">
+					{% csrf_token %}
+				<input type="hidden"  name="posterid">
+				<div class="field" style="display: none">
+					
+					<input type="text" name="eventname" placeholder="Title" >
+				</div>
+				<div class="field">
+					<label>Event Title</label>
+
+					<input type="text" name="eventnewname" placeholder="Title" >
+				</div>
+				  <div class="field">
+				    <label>Event Start Date</label>
+				    <input type="text" name="eventdate" placeholder="Start Date" >
+			  </div>
+			  <div class="field">
+			    <label>Event End Date</label>
+			    <input type="text" name="eventenddate" placeholder="End Date" >
+			  </div>
+			  <div class="field">
+			    <label>Event Place</label>
+			    <input type="text" name="eventplace" placeholder="Place" >
+			  </div>
+			  <div class="field">
+			    <label>Event Discription</label>
+			    <textarea name="eventtext" placeholder="Discription"></textarea>
+			
+			  </div>
+	  
+			<button class="ui button" type="submit">Edit</button>
+				</form>
+			
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -166,8 +197,17 @@
 	</script>
 	<script type="text/javascript">
 		$('.holder').click(function() {
-			$('.ui.modal').modal('show')
+			
+			console.log($(this).find("p[name=eventname]").text())
+			//$("input[name=posterid]").val($(this).find("p[name=id]").text())
+			$("input[name=eventname]").val($(this).find("p[name=eventname]").text())
+			$("input[name=eventnewname]").val($(this).find("p[name=eventname]").text())
 
+			$("input[name=eventdate]").val($(this).find("p[name=eventdate]").text())
+			$("input[name=eventenddate]").val($(this).find("p[name=eventenddate]").text())
+			$("input[name=eventplace]").val($(this).find("p[name=eventplace]").text())
+			$("input[name=eventtext]").val($(this).find("p[name=eventtext]").text())
+			$(".ui.modal").modal('show')
 		})
 		$(".ui.modal").modal({
 		closable: true

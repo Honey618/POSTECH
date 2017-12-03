@@ -69,5 +69,33 @@ class FeedbackForm(forms.Form):
 		poster.save()
 
 		return poster
-	
+
+class EditForm(forms.Form):
+	eventname = forms.CharField()
+	eventnewname = forms.CharField()
+
+	eventdate = forms.CharField()
+	eventenddate = forms.CharField(required=False)
+	eventtext = forms.CharField(required=False)
+	eventplace = forms.CharField(required=False)
+	def edit_upload(self, eventname, new):
+		from .models import User, Poster
+		print(eventname)
+		posters = Poster.objects.filter(eventname=eventname)
+		print(len(posters))
+		for poster in posters:
+			print(poster.eventname)
+			print(self.cleaned_data['eventname'])
+			poster.eventname=self.cleaned_data['eventnewname']
+			poster.eventdate=self.cleaned_data['eventdate']
+			if self.cleaned_data['eventenddate'] =='' :
+				poster.eventenddate=self.cleaned_data['eventdate']
+			else:
+				poster.eventenddate=self.cleaned_data['eventenddate']
+
+			poster.eventplace=self.cleaned_data['eventplace']
+			poster.eventtext=self.cleaned_data['eventtext']
+			poster.save()
+
+
 

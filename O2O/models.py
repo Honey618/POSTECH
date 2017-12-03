@@ -19,9 +19,10 @@ class Poster(models.Model):
     uploaddate = models.DateTimeField(
             default=timezone.now)
     eventname = models.CharField(max_length = 50)
-    eventdate = models.DateTimeField(
-            blank=True, null=True)
-    eventenddate = models.DateTimeField(blank=True, null=True)
+    eventdate = models.CharField(
+            blank=True, null=True, max_length = 50)
+    eventenddate = models.CharField(
+            blank=True, null=True, max_length = 50)
     eventplace = models.CharField(max_length = 50, null=True)
     eventtext = models.TextField()
     eventholder = models.CharField(max_length = 50, null=True)

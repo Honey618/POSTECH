@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
 from .models import Poster, User
-from .forms import UserForm, PictureUploadForm, FeedbackForm
+from .forms import UserForm, PictureUploadForm, FeedbackForm, EditForm
 from .parser.detect import *
 from .parser.parser import *
 
@@ -27,7 +27,7 @@ def myimages(request):
 		return redirect('/')	
 
 
-	user = User.objects.get(username = username);
+	user = User.objects.get(username = username)
 	posters = Poster.objects.filter(user=user)
 
 
@@ -185,3 +185,22 @@ def feedback_upload(request):
 
 
 		return redirect('/')
+
+def event_edit(request):
+	if request.method == 'GET':
+		return redirect('/')
+
+	else :
+		edit_form = EditForm(request.POST, request.FILES)
+		if edit_form.is_valid():
+			edit_form.edit_upload(eventname=request.POST['eventname'], new=request.POST['eventnewname'])
+			print("DDDD")
+			return redirect('/myimages')
+
+
+		else:
+			print(edit_form.errors)
+
+
+	return redirect('/')
+

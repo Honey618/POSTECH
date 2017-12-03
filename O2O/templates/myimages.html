@@ -25,7 +25,9 @@
 		</div>
 		<div class="login">
 			<div class="name">
-				{{ users }}
+				{% if users %}
+					{{ users }}
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -40,12 +42,11 @@
 			<a class="item" href = "{% url 'logout' %}" id="logout-button">
 				<i class="frown icon"></i> Logout
 			</a>
-			<a class="item">
+			<a class="item" href="https://calendar.google.com/calendar">
 				<i class="calendar icon"></i> Open Calendar
 			</a>
 		</div>
 		<div class="pusher">
-			
 				<div class="ui basic segment">
 					{% for poster in posters %}
 						{% if poster.eventholder == poster.user.username %}

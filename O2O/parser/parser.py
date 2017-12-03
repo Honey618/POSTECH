@@ -3,6 +3,10 @@ from __future__ import unicode_literals
 
 from operator import itemgetter
 
+from dateutil import parser
+from datetime import datetime
+
+
 contact_sample = ['문의']
 place_sample = ['장소', '위치']
 date_sample = ['기간', '일시', '날짜', '언제', 'when', '일정']
@@ -18,16 +22,36 @@ def datecut(s):
     tmp1=""
     tmp2=""
     for i in range(len(s)):
-        if(s[i]>='0' and s[i]<='9'):
+        if(str(s[i])>='0' and str(s[i])<='9'):
             tmp1=s[i:]
             break;
     for i in range(len(tmp1)):
         I = len(tmp1)-1-i
-        print(tmp1[I])
-        if(tmp1[I]>='0' and tmp1[I]<='9'):
+        if(str(tmp1[I])>='0' and str(tmp1[I])<='9'):
             tmp2=tmp1[:I+1]
+       
+            if(tmp1[I+1:I+3].lower()=='am' or tmp1[I+1:I+3].lower()=='pm'):
+            	tmp2=tmp1[:I+3]
             break;
     return tmp2
+
+def parcut(s):
+	flag1=False
+	flag2=False
+	start=0
+	end=0
+	for i in range(len(s)):
+		if(s[i]=='('):
+			flag1=True
+			start=i
+		elif(s[i]==')'):
+			flag2=True
+			end=i
+	if (flag1 and flag2):
+		return s[:start]+" "+s[end+1:]
+	else:
+		return s
+
 
 def parse_list(contentList):
 	content=[]
@@ -75,8 +99,30 @@ def evnt_parser(contentList):
 	url = detect_url(newList)
 	contact = detect_contact(newList)
 	place = detect_place(newList)
+	
+	date[0]=datecut(date[0])
+	a=parcut(date[0])
+	print(a)
+	a=a.replace("~",'-')
+	a=a.replace(",",'.')
+	a=a.replace("년",'.')
+	a=a.replace("월",'.')
+	a=a.replace("일",'.')
+	b=a.split("-")
+	result_data=[]
+	if(len(b)==1):
+		b[0]=parser.parse(b[0]).strftime('%Y-%m-%dT%H:%M:%S')
+		result_data=[b[0],b[0]]
+	else:
+		b[0]=parser.parse(b[0])
+		b[1]=parser.parse(b[1])
+		now = datetime.now()
+		if(now.year==b[1].year and now.month==b[1].month and now.day==b[1].day):
+			b[1]=b[1].replace(year=b[0].year, month=b[0].month, day=b[0].day)
+		result_data=[b[0].strftime('%Y-%m-%dT%H:%M:%S'), b[1].strftime('%Y-%m-%dT%H:%M:%S')]
 
-	return({"title": [listSize[0]["content"]], "date": dates, "url": url, "contact": contact, "place": place})
+	return({"title": [listSize[0]["content"]], "date": result_data, "url": url, "contact": contact, "place": place})
+
 
 def detect_date(contentList):
     sample1 = ['기간', '일시', '날짜', '언제', 'when', '일정']
@@ -88,7 +134,6 @@ def detect_date(contentList):
     for e in contentList:
         count=include(e, sample1)+include(e, sample2)+include(e, sample3)+include(e, sample4)+include(e, sample5)
         if(count>0):
-
             result.append([e,count])
     result= sorted(result, key=lambda tup: tup[1], reverse=True)
     return result

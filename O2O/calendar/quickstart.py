@@ -36,11 +36,11 @@ def create_event(data, u_name):
       'location': data['location'],
       'description': data['description'],
       'start': {
-        'dateTime': data['start']+'T09:00:00',
+        'dateTime': data['strat'],
         'timeZone': 'Asia/Seoul',
       },
       'end': {
-        'dateTime': data['end']+'T17:00:00',
+        'dateTime': data['end'],
         'timeZone': 'Asia/Seoul',
       },
       'recurrence': [
@@ -64,7 +64,7 @@ def create_event(data, u_name):
     return(event.get('htmlLink'))
 
 def date_trans(s):
-    return parser.parse(s).strftime('%Y/%m/%d')
+    return parser.parse(s).strftime('%Y-%m-%d')
 
 def get_credentials(user):
     """Gets valid user credentials from storage.

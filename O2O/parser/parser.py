@@ -100,10 +100,10 @@ def evnt_parser(contentList):
 	contact = detect_contact(newList)
 	place = detect_place(newList)
 	
-	for d in date:
-		d[0] = datecut(d[0])
-
-	a=parcut(date[0][0]).replace("~",'-')
+	date[0]=datecut(date[0])
+	a=parcut(date[0])
+	print(a)
+	a=a.replace("~",'-')
 	a=a.replace(",",'.')
 	a=a.replace("년",'.')
 	a=a.replace("월",'.')

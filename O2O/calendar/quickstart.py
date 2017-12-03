@@ -36,7 +36,7 @@ def create_event(data, u_name):
       'location': data['location'],
       'description': data['description'],
       'start': {
-        'dateTime': data['strat']+'T09:00:00',
+        'dateTime': data['start']+'T09:00:00',
         'timeZone': 'Asia/Seoul',
       },
       'end': {

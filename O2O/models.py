@@ -21,9 +21,9 @@ class Poster(models.Model):
     eventname = models.CharField(max_length = 50)
     eventdate = models.DateTimeField(
             blank=True, null=True)
-    eventenddate = models.DateTimeField(
-            blank=True, null=True)
+    eventenddate = models.DateTimeField(blank=True, null=True)
     eventplace = models.CharField(max_length = 50, null=True)
     eventtext = models.TextField()
+    eventholder = models.CharField(max_length = 50, null=True)
     file = models.ImageField()
 

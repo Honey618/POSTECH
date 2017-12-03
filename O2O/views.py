@@ -125,17 +125,29 @@ def file_upload(request):
 
 		picture_upload_form = PictureUploadForm(request.POST, request.FILES)
 		if picture_upload_form.is_valid():
+
 			poster = picture_upload_form.file_upload(username=username )
+
 			print(poster)
 			result = evnt_parser(detect_document(settings.BASE_DIR+poster.file.url))
 			if poster:
 				return render(request, 'main.html', {'result': result, 'posterId' : poster.id, 'poster' : poster, 'users': username })
 
+
 		else:
-			return redirect('/')
+			message = "Please Upload Poster"
+			return redirect('/?message=%s' % message)
 
 		# error handling
 		return render(request, 'main.html', {'users': username })
+
+def set_superuser(eventname, username):
+	posters = Poster.objects.filter(eventname=eventname)
+	for poster in posters:
+		poster.eventholder = username
+		print(poster.user.username)
+		poster.save()
+
 
 def feedback_upload(request):
 	if request.method == 'GET':
@@ -149,13 +161,17 @@ def feedback_upload(request):
 			print(request.POST['posterid'])
 
 			poster = feedback_form.feedback_upload(username=request.session['username'], posterId=request.POST['posterid'])
+			if request.POST['isholder'] == 'true':
+				set_superuser(poster.eventname, request.session['username'])
+
+
 			print(poster.file.url)
 			#poster = feedback_form.feedback_upload(username=request.session['username'])
 			data={}
 			data['summary'] = poster.eventname
 			data['location'] = ""
 			data['description'] = poster.eventtext
-			data['strat'] = poster.eventdate
+			data['start'] = poster.eventdate
 			data['end'] = poster.eventenddate
 			#print(data)
 

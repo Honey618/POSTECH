@@ -174,10 +174,10 @@ def feedback_upload(request):
 			data['start'] = poster.eventdate
 			data['end'] = poster.eventenddate
 			#print(data)
-
+			username = request.session.get('username')
 			if poster:
-				resultLink = create_event(data,request.session['username'])
-			return render(request, 'main.html', {'posterId' : poster.id, 'poster' : poster, 'users': request.session['username'], 'resultLink' : resultLink})
+				resultLink = create_event(data,username)
+			return render(request, 'main.html', {'posterId' : poster.id, 'poster' : poster, 'users': username, 'resultLink' : resultLink})
 
 
 		else:

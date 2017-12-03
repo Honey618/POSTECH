@@ -170,13 +170,14 @@ input.upload {
 
 .card {
     position: relative;
-    margin: 10px;
+    background-color: #efefef;
+    margin-bottom: 10px;
 }
 .card-image {
     width: 140px;
     height: 140px;
 
-    background-color: #efefef;
+    background-color: gray;
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;

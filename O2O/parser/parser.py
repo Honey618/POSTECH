@@ -94,7 +94,8 @@ def evnt_parser(contentList):
 	print("Supposed to Title : {}".format(listSize[0]["content"]))
 	newList = parse_list(listSize)
 
-	date = detect_date(newList)
+	date = detect_date(newList).pop(0)
+	dates = datecut(date[0]).split('-')
 	url = detect_url(newList)
 	contact = detect_contact(newList)
 	place = detect_place(newList)
@@ -121,6 +122,7 @@ def evnt_parser(contentList):
 		result_data=[b[0].strftime('%Y-%m-%dT%H:%M:%S'), b[1].strftime('%Y-%m-%dT%H:%M:%S')]
 
 	return({"title": [listSize[0]["content"]], "date": result_data, "url": url, "contact": contact, "place": place})
+
 
 def detect_date(contentList):
     sample1 = ['기간', '일시', '날짜', '언제', 'when', '일정']

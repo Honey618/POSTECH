@@ -13197,7 +13197,7 @@ a.ui.active.label:ActiveHover:before {
 .ui.red.labels .label,
 .ui.red.label {
   background-color: #DB2828 !important;
-  border-color: #DB2828 !important;
+  border-color: rgba(219, 40, 40, 0.63);
   color: #FFFFFF !important;
 }
 

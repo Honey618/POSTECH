@@ -161,7 +161,7 @@ def feedback_upload(request):
 			print(request.POST['posterid'])
 
 			poster = feedback_form.feedback_upload(username=request.session['username'], posterId=request.POST['posterid'])
-			if request.POST['isholder'] == 'true':
+			if 'isholder' in request.POST:
 				set_superuser(poster.eventname, request.session['username'])
 
 

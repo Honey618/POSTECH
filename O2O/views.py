@@ -45,9 +45,12 @@ def main(request):
 
 	users = request.session.get('username')
 
-	return render(request, 'main.html', {'users': users, 'posters': posters})
+	return render(request, 'main.html', {'users': users, 'posters': posters })
 
 def sign_up(request):
+	username = None;
+	message = "";
+
 	if request.method == 'GET':
 		return redirect('/')
 
@@ -55,61 +58,84 @@ def sign_up(request):
 		user_form = UserForm(data=request.POST)
 
 		if user_form.is_valid():
-			user = user_form.sign_up()
-
-			if user:
-				return redirect('/')
-
+			try:
+				user = user_form.sign_up()
+			except Exception as e:
+				message = "This ID Already Exists"
 			else:
-				# TODO: 에러 처리 해줘야함
-				return redirect('/')
+				pass
+			finally:
+				return redirect('/?message=%s' % message)
+			
+
+			# if user:
+			# 	return redirect('/')
+
+			# else:
+			# 	# TODO: 에러 처리 해줘야함
+			# 	return redirect('/')
 		return redirect('/')
 
 def login(request):
+	username = None;
+	message = ""
+
 	if request.method == 'GET':
 
 		return redirect('/')
 	else :
 		user_form = UserForm(data=request.POST)
+		
+		# if not username:
+			
+			# return render(request, 'main.html', {'message': 'Please Sign Up First'})
 
 		if user_form.is_valid():
-			user = user_form.login()
-
-			if user:
-				request.session['username'] = user.username
-				
-				print(request.session['username'])
-
-				# del request.session['username']
-				return render(request, 'main.html', {'users': request.session['username']})
-#				return redirect('/index')
-
+			try:
+				user = user_form.login()
+			except Exception as e:
+				message = 'Please Sign Up First'
 			else:
-				print(user.username)
-				return render(request, 'main.html', {'users': request.session['username']})
-#				return redirect('/index')
+				request.session['username'] = user.username;
+			finally:
+				username = request.session.get('username')
+				return redirect('/?message=%s' % message)
+			
+
+# 			if user:				
+# 				# del request.session['username']
+# 				return render(request, 'main.html', {'users': username})
+# #				return redirect('/index')
+
+# 			else:
+# 				return render(request, 'main.html', {'users': username})
+# #				return redirect('/index')
 		return redirect('/')
 
 def file_upload(request):
+	message= ""
 	if request.method == 'GET':
 		return redirect('/')
 
 	else :
+		username = request.session.get('username')
+		if not username:
+			message = "Please Login First"
+			return redirect('/?message=%s' % message)
 
-		print(request)
 		picture_upload_form = PictureUploadForm(request.POST, request.FILES)
 		if picture_upload_form.is_valid():
-			poster = picture_upload_form.file_upload(username=request.session['username'])
+			poster = picture_upload_form.file_upload(username=username )
 			print(poster)
 			result = evnt_parser(detect_document(settings.BASE_DIR+poster.file.url))
 			if poster:
-				return render(request, 'main.html', {'result': result, 'posterId' : poster.id, 'poster' : poster, 'users': request.session['username']})
+				return render(request, 'main.html', {'result': result, 'posterId' : poster.id, 'poster' : poster, 'users': username })
 
 		else:
-			print(picture_upload_form.errors)
+			return redirect('/')
 
 		# error handling
-		return render(request, 'main.html', {'users': request.session['username']})
+		return render(request, 'main.html', {'users': username })
 
 def feedback_upload(request):
 	if request.method == 'GET':

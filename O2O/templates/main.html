@@ -36,7 +36,7 @@
 			<i class="sidebar icon"></i>
 		</a>
 		<div class = "logo1">
-			<a href="">
+			<a href="/">
 				<img id = "logoid" alt="POSTECH" src = "static/Images/logo.jpg" width="118" height="33">
 			</a>
 		</div>
@@ -72,6 +72,9 @@
 		</div>
 		<div class="pusher">
 			<div class="ui basic segment">
+				<div id='message'>
+					
+				</div>
 				<div class="background_image">
 					{% if poster %}
 						<img src="{{ poster.file.url }}">
@@ -195,6 +198,15 @@
 */
 	</script>
 	<script>
+		function getParameterByName(name, url) {
+		    if (!url) url = window.location.href;
+		    name = name.replace(/[\[\]]/g, "\\$&");
+		    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		        results = regex.exec(url);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
 /*		document.getElementById('login-button').onclick = function() {
 			document.getElementById('login-button').style.display = 'none';
 			document.getElementById('logout-button').style.display = 'block';
@@ -211,6 +223,9 @@
 			$(this).closest("form").attr('action', '/sign_up')
 		})
 		$(document).ready(function() {
+			var message = getParameterByName('message');
+			$('#message').html(message);
+
 			$('a.item').click(function() {
 				var loginBox = $(this).attr('href');
 				$(loginBox).fadeIn(300);

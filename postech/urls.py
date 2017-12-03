@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.contrib.staticfiles import storage
 from django.conf import settings
 from django.conf.urls.static import static
-
-from O2O.views import index, sign_up, login, file_upload, feedback_upload, myimages, info
+from django.contrib.auth import views as auth_views
+from O2O.views import sign_up, login, file_upload, feedback_upload, myimages
 
 
 urlpatterns = [
@@ -27,13 +27,13 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^', include('O2O.urls')),
     url(r'^O2O/', include('O2O.urls')),
-    url(r'^index$', index),
+    # url(r'^index$', index),
     url(r'^sign_up$', sign_up),
     url(r'^login$', login),
     url(r'^file_upload$', file_upload),
     url(r'^feedback_upload$', feedback_upload),
     url(r'^myimages$', myimages),
-    url(r'^info$', info),
+    url(r'^logout/$', auth_views.logout, {'next_page' : '/'}, name = 'logout'),
 ]
 
 

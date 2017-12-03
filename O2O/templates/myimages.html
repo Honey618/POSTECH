@@ -31,31 +31,14 @@
 	</div>
 	<div class="ui bottom attached segment">
 		<div class="ui inverted labeled icon left inline vertical demo sidebar menu">
-			<a class="item" href="index">
+			<a class="item" href="/">
 				<i class="home icon"></i> Home
 			</a>
 			<a class="item" href="">
 				<i class="block layout icon"></i> My Images
 			</a>
-			<a class="item" href="#login-box">
-				<i class="smile icon"></i> Login
-				<div id="login-box" class="login-popup">
-					<a href="#" class="close"><img src="static/Images/exit.gif" width="10" height="10" class="btn_close" title="Close Window" alt="Close" /></a>
-					<form method="POST" class="signin">
-					{% csrf_token %}
-						<fieldset class="textbox">
-							<label class="username">
-								<span>Username</span>
-								<input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
-							</label>
-							<button class="submit button" type="submit" id="Login">Login</button>
-							<button class="submit button" type="submit" id="Sign_Up">Sign Up</button>
-							<!-- <p> -->
-								<!-- <a class="forgot" href="Shinsta.html">Forgot your password?</a> -->
-							<!-- </p>         -->
-						</fieldset>
-					</form>
-				</div>
+			<a class="item" href = "{% url 'logout' %}" id="logout-button">
+				<i class="frown icon"></i> Logout
 			</a>
 			<a class="item">
 				<i class="calendar icon"></i> Open Calendar
@@ -64,8 +47,14 @@
 		<div class="pusher">
 			<div class="ui basic segment">
 				{% for poster in posters %}
-					<div id="{{ poster.id }}" class="card2" >
-						<img src="{{ poster.file.url }}" alt="Sana" width="174" height="261" href="info">
+					<div id="{{ poster.id }}" class="card" >
+						<div class = "card-image" style="background-image: url({{ poster.file.url }})"></div>
+						<div class = "card-explanation">
+							<p>{{ poster.eventname }}</p>
+							<p>{{ poster.eventdate }}</p>
+							<p>{{ poster.attract }}</p>
+							
+						</div>
 					</div>
 				{% endfor %}
 			</div>

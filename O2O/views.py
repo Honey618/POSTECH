@@ -6,37 +6,50 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
+from .models import Poster, User
 from .forms import UserForm, PictureUploadForm, FeedbackForm
 from .parser.detect import *
 from .parser.parser import *
 
 from .calendar.quickstart import *
 
-
-def main(request):
-	return render(request, 'main.html')
+# def main(request):
+# 	return render(request, 'main.html')
 
 def myimages(request):
 	from .models import Poster
 #	posters = Poster.objects.filter(id=user)
+	# posters = Poster.objects.all()
+
+	username = request.session.get('username')
+	
+	if not username:
+		return redirect('/')	
+
+
+	user = User.objects.get(username = username);
+	posters = Poster.objects.filter(user=user)
+
+
+	for poster in posters:
+		attract = Poster.objects.filter(eventname=poster.eventname)
+		poster.attract = len(attract)
+
+
+	return render(request, 'myimages.html', {'users': username, 'posters': posters})
+
+
+def main(request):
+	from .models import Poster
 	posters = Poster.objects.all()
 
-	return render(request, 'myimages.html', {'users': request.session['username'], 'posters': posters})
+	users = request.session.get('username')
 
-def info(request):
-	from .models import Poster
-
-	return render(request, 'info.html', {'users': request.session['username'], 'posters': posters})
-
-def index(request):
-	from .models import Poster
-	posters = Poster.objects.all()
-
-	return render(request, 'main.html', {'users': request.session['username'], 'posters': posters})
+	return render(request, 'main.html', {'users': users, 'posters': posters})
 
 def sign_up(request):
 	if request.method == 'GET':
-		return redirect('/index')
+		return redirect('/')
 
 	else:
 		user_form = UserForm(data=request.POST)
@@ -45,17 +58,17 @@ def sign_up(request):
 			user = user_form.sign_up()
 
 			if user:
-				return redirect('/index')
+				return redirect('/')
 
 			else:
 				# TODO: 에러 처리 해줘야함
-				return redirect('/index')
-		return redirect('/index')
+				return redirect('/')
+		return redirect('/')
 
 def login(request):
 	if request.method == 'GET':
-		return redirect('/index')
 
+		return redirect('/')
 	else :
 		user_form = UserForm(data=request.POST)
 
@@ -75,11 +88,11 @@ def login(request):
 				print(user.username)
 				return render(request, 'main.html', {'users': request.session['username']})
 #				return redirect('/index')
-		return redirect('/index')
+		return redirect('/')
 
 def file_upload(request):
 	if request.method == 'GET':
-		return redirect('/index')
+		return redirect('/')
 
 	else :
 
@@ -100,7 +113,7 @@ def file_upload(request):
 
 def feedback_upload(request):
 	if request.method == 'GET':
-		return redirect('/index')
+		return redirect('/')
 
 	else :
 		print(request)
@@ -129,4 +142,4 @@ def feedback_upload(request):
 			print(feedback_form.errors)
 
 
-		return redirect('/index')
+		return redirect('/')

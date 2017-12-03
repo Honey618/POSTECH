@@ -5,5 +5,4 @@ from . import views
 
 urlpatterns = [
             url(r'^$', views.main, name='main'),
-			url(r'^logout/$', auth_views.logout, {'next_page' : '/'}),
             ]

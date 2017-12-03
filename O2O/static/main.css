@@ -1,13 +1,14 @@
 html, body{
+    position: relative;
 	background-color: #f4f4f4;
 	margin: 0px;
 	padding: 0px;
-    height: 105%;
+    height: 100%;
     width: auto;
-	overflow-y: auto;
+	/*overflow-y: auto;*/
 }
 .pusher{
-    overflow: auto!important;
+    /*overflow: auto!important;*/
 }
 img {
 	max-width: 100%;
@@ -163,20 +164,37 @@ input.upload {
 }
 
 .card {
-
-}
-
-.card2 {
-    display: inline-block;
-    width: 100px;
-    margin: 2.5px;
-}
-.card2 img {
-    width: 100px;
-    height: 180px;
-    display: inline-block;
+    position: relative;
     margin: 10px;
 }
+.card-image {
+    width: 140px;
+    height: 140px;
+
+    background-color: #efefef;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /*display: inline-block;*/
+    /*margin: 10px;*/
+}
+
+.card-explanation {
+    padding-left: 150px;
+
+    box-sizing: border-box;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    /*display: inline-block;*/
+}
+
+
+.card-explanation p {
+    margin: 0.2em 0;
+}
+
 .button1 {
     background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
     background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
@@ -225,7 +243,6 @@ input.upload {
     margin-top: 7px;
     margin-right: 10px;
 }
-
 
 
 /* Mask for background, by default is not display */

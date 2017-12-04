@@ -81,7 +81,7 @@ class EditForm(forms.Form):
 	def edit_upload(self, eventname, new):
 		from .models import User, Poster
 		print(eventname)
-		posters = Poster.objects.filter(eventname=eventname)
+		posters = Poster.objects.get(eventname__contains=eventname)
 		print(len(posters))
 		for poster in posters:
 			print(poster.eventname)

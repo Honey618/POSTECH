@@ -112,13 +112,15 @@ def evnt_parser(contentList):
 	result_data=[]
 	if(len(b)==1):
 		b[0]=parser.parse(b[0]).strftime('%Y-%m-%dT%H:%M:%S')
-		result_data=[b[0],b[0]]
+		result_data=[b[0],b[0],replace(hour=23, minute=59)]
 	else:
 		b[0]=parser.parse(b[0])
 		b[1]=parser.parse(b[1])
 		now = datetime.now()
 		if(now.year==b[1].year and now.month==b[1].month and now.day==b[1].day):
 			b[1]=b[1].replace(year=b[0].year, month=b[0].month, day=b[0].day)
+		if(b[1].hour ==0 and b[1].minute == 0):
+			b[1]=b[1].replace(hour=23, minute=59)
 		result_data=[b[0].strftime('%Y-%m-%dT%H:%M:%S'), b[1].strftime('%Y-%m-%dT%H:%M:%S')]
 
 	return({"title": [listSize[0]["content"]], "date": result_data, "url": url, "contact": contact, "place": place})

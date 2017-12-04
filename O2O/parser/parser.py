@@ -111,8 +111,10 @@ def evnt_parser(contentList):
 	b=a.split("-")
 	result_data=[]
 	if(len(b)==1):
-		b[0]=parser.parse(b[0]).strftime('%Y-%m-%dT%H:%M:%S')
-		result_data=[b[0],b[0],replace(hour=23, minute=59)]
+		tmp=parser.parse(b[0]).strftime('%Y-%m-%dT%H:%M:%S')
+		tmp1=parser.parse(b[0]).replace(hour=23, minute=59).strftime('%Y-%m-%dT%H:%M:%S')
+		
+		result_data=[tmp,tmp1]
 	else:
 		b[0]=parser.parse(b[0])
 		b[1]=parser.parse(b[1])

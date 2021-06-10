@@ -4,7 +4,7 @@ cachetools==2.0.1
 certifi==2017.11.5
 chardet==3.0.4
 dill==0.2.7.1
-Django==1.11.7
+Django==2.2.24
 enum-compat==0.0.2
 eventlet==0.21.0
 falcon==1.3.0
